@@ -1,0 +1,125 @@
+{%include file="hapyfishadmin/header.phtml"%}
+<style type="text/css">
+<!--
+table{font-size:14px;border-collapse: collapse;border-spacing: 0;empty-cells: show;}
+th, td {border: 1px solid #B1CBE2;}
+th{background-color: #D5E7F3;}
+td{padding:2px;}
+.odd{background-color: #EAF2F5;}
+.total{font-weight:bold;}
+
+-->
+</style>
+	<h1>后台管理</h1>
+	<ul id="nav">
+		<li><a href="{%$baseUrl%}/swhadmin">首页</a></li>
+		<li><a href="{%$baseUrl%}/swhadmin/timegift">时间礼包管理</a></li>
+		<li><a href="{%$baseUrl%}/swhadmin/levelgift">等级礼包管理</a></li>
+		<li><a href="{%$baseUrl%}/swhadmin/sevengift">七天礼包管理</a></li>
+		<li><a href="{%$baseUrl%}/swhadmin/package">礼包管理</a></li>
+		<li><a href="{%$baseUrl%}/swhadmin/daliytask">日常任务</a></li>
+		<li><a href="{%$baseUrl%}/swhadmin/guild">公会</a></li>
+		<li>当前登录者：{%$adminName%}</li>
+	</ul>
+
+	<div id="container">
+		<div id="divedit">
+		<br/>
+		添加新成员
+		<br/>
+		<table >
+		<tr>
+		<th>uid</th><th>操做</th>
+		</tr>
+		<tr><td><input id="newuser" name="id" size=8 /></td>
+		<td><input type="button"  onclick="add();" value="添加"/>
+		</tr>
+		</table>
+		<br/>
+		拉新加积分
+		<br/>		
+		<table >
+		<tr>
+		<th>uid</th><th>积分</th><th>操做</th>
+		</tr>
+		<tr><td><input id="iuid" name="id" size=8 /></td>
+		<td><input id="point" name="id" size=8 /></td>
+		<td><input type="button"  onclick="addpoint();" value="添加"/>
+		</tr>
+		</table>
+		<br/>
+		<br/>
+		<table >
+		<tr>
+			<th style="width:100px;">uid</th><th style="width:100px;">登陆</th><th style="width:100px;">充值</th><th style="width:100px;">邀请</th><th style="width:100px;">拉新</th><th style="width:100px;">总计</th><th style="width:100px;">删除</th>
+		</tr>
+		{% foreach from=$list item=data %}
+		<tr><td>{%$data.uid%}</td>
+		<td>{%$data.login%}</td>
+		<td>{%$data.pay%}</td>
+		<td>{%$data.invite%}</td>
+		<td>{%$data.introduce%}</td>
+		<td>{%$data.total%}</td>
+		<td><input type="button" value="删除" onclick="deleteg({%$data.uid%});" /></td>
+		</tr>
+		{% /foreach  %}
+		</table>
+		
+		</div>
+	</div><!--/#container-->
+	<script type="text/javascript">
+	function add() {
+		var uid = $("#newuser").val();
+		$.ajax({
+            type: 'POST',
+            url: '/swhadmin/addguild',
+            data: {'uid': uid},
+            dataType: 'text',
+            success: function(resp){
+            	location.reload(true);  
+            },
+    		error: function(resp){
+    		},
+    		complete: function(resp){
+    		}
+ 		});
+		
+	}
+
+	function deleteg(uid) {
+		$.ajax({
+            type: 'POST',
+            url: '/swhadmin/delguild',
+            data: {'uid': uid},
+            dataType: 'text',
+            success: function(resp){
+            	location.reload(true);  
+            },
+    		error: function(resp){
+    		},
+    		complete: function(resp){
+    		}
+ 		});
+		
+	}
+
+	function addpoint()
+	{
+		var uid = $("#iuid").val();
+		var point = $("#point").val();
+		$.ajax({
+            type: 'POST',
+            url: '/swhadmin/addpoint',
+            data: {'uid':uid, 'num':point},
+            dataType: 'text',
+            success: function(resp){
+            	location.reload(true);  
+            },
+    		error: function(resp){
+    		},
+    		complete: function(resp){
+    		}
+ 		});
+	}
+	</script>
+{%include file="hapyfishadmin/footer.phtml"%}

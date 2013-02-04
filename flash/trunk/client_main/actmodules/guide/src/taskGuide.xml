@@ -1,0 +1,27 @@
+<list>
+	<guide id="11" name="">
+		<prevStepList>
+			<stepStep>
+				<actTips><![CDATA[{getModule}("TaskListUISprite").view.closeBtn]]></actTips>
+				<container><![CDATA[{stage}]]></container>
+				<toNextMouseList>
+					<mouseEvent>
+						<target><![CDATA[{TaskListUISprite}.view.closeBtn]]></target>
+					</mouseEvent>
+				</toNextMouseList>
+				<addList>
+				</addList>
+			</stepStep>
+		</prevStepList>
+		<nextStepList>
+		</nextStepList>
+		<stepFinishList>
+			<stepFinish>
+				<type>noviceGuideHelper_TASK_COMPLETED</type>
+				<addList>
+					<expr><![CDATA[{event}.data=={helper}.currGuideId]]></expr>
+				</addList>
+			</stepFinish>
+		</stepFinishList>
+	</guide>
+</list>

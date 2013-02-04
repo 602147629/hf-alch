@@ -1,0 +1,228 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="{%$staticUrl%}/alchemy/feed.css?v=1.04" rel="stylesheet" type="text/css" />
+<script src="{%$staticUrl%}/js/jquery-1.4.3.min.js" type="text/javascript"></script>
+
+<title>炼金客服</title>
+<style type="text/css">
+body{background:#ffffff; color:#666; font-family:微软雅黑; ! important;font-size:16px;font-weight:bold;}
+body,ul,li{margin:0; padding:0;}
+a{text-decoration:none; color:#666666;}
+
+ul li{list-style:none;}
+</style>
+</head>
+<body>
+<!-- ClickTale Top part -->
+<script type="text/javascript">
+var WRInitTime=(new Date()).getTime();
+
+</script>
+<!-- ClickTale end of Top part -->
+<div class="z-m z-w74" style="margin-top:20px;">
+<script type="text/javascript">
+
+	function checkmin () {
+		var sname = "28";
+		var aname = sname.split(",");
+		var textfield = document.getElementById('textfield').value.replace(/^\s+|\s+$/g, "");
+		if ( textfield == '' || textfield == '不少于四个字，简述问题。') {
+			document.getElementById('show_textfield').innerHTML = "内容不能为空";
+			return false;
+		}else {
+			if( textfield.length < 4 || textfield == '不少于四个字，简述问题。' ) {
+				document.getElementById('show_textfield').innerHTML = "<br />你输入的字符少于4个，请继续输入。";
+				return false;
+			} 
+			document.getElementById('show_textfield').innerHTML = "";
+		}
+		for ( var i=0; i<aname.length; i++ ) {
+			var lname = document.getElementById('name_' + aname[i]).value.replace(/^\s+|\s+$/g, "");
+			if ( lname.length == 0) {
+				document.getElementById('show_' + aname[i]).innerHTML = "内容不能为空";
+				return false;
+			} else {
+				document.getElementById('show_' + aname[i]).innerHTML = "";
+			}
+		}
+		
+		var photo	= document.getElementById("photo").value;
+		var i = photo.lastIndexOf('.');
+		var len = photo.length;
+		var photoFormat = photo.substring(len,i+1);
+		var exName = "JPG,GIF,PNG";
+		var k = exName.indexOf(photoFormat.toUpperCase());
+		return true;
+	}
+
+	function checkLen(obj) {
+		var maxChars = 500;//最多字符数
+		if (obj.value.length > maxChars) {
+			obj.value = obj.value.substring(0,maxChars);
+		}
+		var curr = maxChars - obj.value.length;
+		document.getElementById("count").innerHTML = curr;
+	}
+	
+	
+	function onFocus() {
+		var text = document.getElementById('textfield').value;
+		if ( text == "不少于四个字，简述问题。" ){
+			document.getElementById('textfield').value = "";
+			document.getElementById('textfield').style.color = "";
+		}
+	}
+	
+	function onBlur() {
+		var text = document.getElementById('textfield').value;
+		if ( text == "不少于四个字，简述问题。" || text == '' ){
+			document.getElementById('textfield').value = "不少于四个字，简述问题。";
+		}
+	}
+
+</script>
+<div class="b8">
+	<div class="height8"></div>
+	<div>
+		
+    	<a href="{%$hostUrl%}/faq/index?uid={%$uid%}">
+    		<div class="tab_p6a">提交问题</div>
+    	</a>
+    	<div class="w20"></div>
+    	<a href="{%$hostUrl%}/faq/myfaq?uid={%$uid%}">
+    	<div class="tab_p7a">我的问题</div>
+    	</a>
+    	<div class="w480"></div>
+  	</div>
+  	<ul class="p6">
+		
+	</ul>
+  	
+    <div class="height4"></div>
+    
+<div class="w460">
+
+<form  method="post" action="{%$hostUrl%}/faq/update" name="UForm" enctype="multipart/form-data">
+<input type="hidden" id="client_ip" name="uid" value="{%$uid%}"/>
+<input type="hidden" id="client_browser" name="sig" value="{%$sig%}"/>
+<input type="hidden" id="client_os" name="time" value="{%$time%}"/>
+<input type="hidden" id="diqu" name="diqu" value=""/>
+<input type="hidden" id="xianlu" name="xianlu" value=""/>
+<input type="hidden" id="flash" name="flash" value=""/>
+<input type="hidden" id="ip" name="ip" value="{%$ip%}"/>
+<input type="hidden" id="browser" name="browser" value="{%$browser%}"/>
+<input type="hidden" id="msg" value="{%$msg%}"/>
+
+<ul>
+<li class="li1"><font class="red">*&nbsp;</font>问题标题： </li>
+<li class="li2">
+
+	<input type="text" name="title" id="textfield"  style="color: #999;" value="不少于四个字，简述问题。" onfocus="onFocus()"/>
+	&nbsp;&nbsp;<span id="show_textfield" style="color: red;"></span>	
+	<div class="color999"> </div> 
+	</li>
+</ul>
+<ul>
+<li class="li1"><font class="red">*&nbsp;</font>问题类型： </li>
+<li class="li2">
+			<select id="slt_status" name="type" style="font-size:14px;">
+			<option value="3" style="color:red;">选择问题类型</option>&nbsp;&nbsp;
+			<option value="1">意见</option>&nbsp;&nbsp;
+			<option value="2">bug</option>&nbsp;&nbsp;
+			</select>
+</li>
+<input type="hidden" name="ctid" id="ctid" value="8">
+<input type="hidden" name="ctpriority" id="ctpriority" value="1">
+</ul>
+<div class="line1"></div>
+<div class="height8"></div>
+<div class="height8"></div>
+	<ul>
+	<li class="li1"><font class="red">*&nbsp;</font>详细描述： </li>
+	<li class="li3">
+		<textarea name="content" id="name_28" size=500 onfocus="if (this.value=='请尽可能详情描述所遇问题，以便更快了解、解决问题。')this.value='';this.style.color='';" cols=""onkeyup="checkLen(this)" rows="" style="width:400px;height:150px;color:#999;">请尽可能详情描述所遇问题，以便更快了解、解决问题。</textarea>
+
+		<div class="prompt">最多500字的问题详细描述。<font id="font_count">还可以有&nbsp;<span id="count">500</span>&nbsp;字描述。</font></div>
+		<span id="show_28" style="color: red;"></span>
+	<script type="text/javascript">
+	function checkLen(obj) {
+		var maxChars = 500;//最多字符数
+		if (obj.value.length > maxChars) {
+			obj.value = obj.value.substring(0,maxChars);
+		}
+		var curr = maxChars - obj.value.length;
+		document.getElementById("count").innerHTML = curr;
+	}
+	function msg()
+	{
+		var msg = $('#msg').val();
+		if(msg != ''){
+			alert(msg);
+		}
+	}
+msg();
+	</script>
+	</li>
+	</ul>
+<div class="height8"></div>
+
+<div class="line1"></div>
+<div class="height8"></div>
+<ul>
+<li class="li1">截图上传：</li>
+<li>
+<div id="uploadImg" style="margin:10px 0;">
+	<input name="photo" id="photo" type="file" size="46" style="height:30px;">
+	<!--<div style="position:absolute; left:133px; top:0; z-index:101px; background:#fff; width:60px;">
+		<div style="position:relative;">
+			<div style="position:absolute; z-index:104; left:0; top:0;">
+				<iframe src="" style="width:66px; height:30px; background-color:transparent;" frameborder="0"></iframe>	
+			</div>
+			<div style="position:absolute; z-index:105; left:0; top:0;">
+				<a href="#" class="button_input" style="float:left; width:60px; height:20px; line-height:20px; text-align:center;">浏览...</a>
+			</div>
+		</div>
+	</div>-->
+</div>
+<div class="prompt" style="padding-left:130px;">（请截图保存为jpg,gif,png格式。）</div>
+</li>
+</ul>
+
+<div style="margin-left: 170px;">
+<input type="submit" value='' class="button_input"  style="width:95px;height:35px;padding:0px;margin:0px;border:0px;" id="feed_buttom" onclick="if ( checkmin() ) { } else {return false;}" />&nbsp;&nbsp;&nbsp;&nbsp;
+</div>
+</form>
+<div class="height8"></div><div class="height8"></div>
+</div>
+<div class="height4"></div>
+</div>
+
+<!-- ClickTale Bottom part -->
+<div id="ClickTaleDiv" style="display: none;"></div>
+{% if $smarty.const.APP_SERVER_TYPE == 1 %}
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-33297048-1']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+{% /if %}
+<script language="javascript" type="text/javascript" src="http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js"></script>
+<script type="text/javascript">
+$('#diqu').val(remote_ip_info.city);
+$('#xianlu').val(remote_ip_info.isp);
+</script>
+<script src="{%$staticUrl%}/js/swfobject.js" type="text/javascript"></script>
+<script type="text/javascript">
+var flashVersion = swfobject.getFlashPlayerVersion();
+$('#flash').val(flashVersion.major+'.'+flashVersion.minor+'.'+flashVersion.release);
+</script>
+</body>
+
+</html>

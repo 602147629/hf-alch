@@ -1,0 +1,15 @@
+<div style="position:absolute;left:970px;top:10px;width:150px;height:940px;background:#FFFFFF;margin:0px;padding:5px 0px;border:1px solid #D9DCE2;margin-top:5px;align:center;text-align:center;font-weight:bold;">
+<div style="color:#3b5998;padding-top:2px;padding-bottom:12px;"><a style="color:#FF0000" href="{%$hostUrl%}/nicktest/clearuser?uid={%$uid%}">重置帐号</a></div>
+<div style="color:#3b5998;padding-top:2px;padding-bottom:12px;"><a style="color:#FF0000" href="{%$hostUrl%}/nicktest/completehelp?uid={%$uid%}">跳过新手引导</a></div>
+<div style="color:#3b5998;padding-top:2px;padding-bottom:12px;"><a style="color:#FF0000" href="javascript:void(0);" onclick="showFaq();">Faq</a></div>
+<div style="color:#3b5998;padding-top:2px;padding-bottom:12px;"><a style="color:#FF0000" href="javascript:void(0);" onclick="hideFlash();">隐藏Flash</a></div>
+
+<script type="text/javascript">
+function showFaq()
+{
+	$('#flashdiv').css('left', -9999);
+	$('#faq').show();
+	$('#faq').height(600);
+}
+</script>
+</div>

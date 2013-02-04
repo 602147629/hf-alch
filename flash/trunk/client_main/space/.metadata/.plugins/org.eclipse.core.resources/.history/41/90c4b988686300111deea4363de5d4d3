@@ -1,0 +1,119 @@
+package happymagic.display.view.task 
+{
+	import flash.display.MovieClip;
+	import flash.display.Sprite;
+	import flash.geom.Rectangle;
+	import happyfish.display.ui.GridItem;
+	import happyfish.display.ui.Tooltips;
+	import happyfish.display.view.IconView;
+	import happyfish.manager.local.LocaleWords;
+	import happyfish.utils.HtmlTextTools;
+	import happymagic.display.view.ui.NeedIconView;
+	import happymagic.manager.DataManager;
+	import happymagic.model.vo.classVo.BaseItemClassVo;
+	import happymagic.model.vo.classVo.MixClassVo;
+	import happymagic.model.vo.ConditionType;
+	import happymagic.model.vo.ConditionVo;
+	import happymagic.model.vo.DecorVo;
+	import happymagic.model.vo.ItemVo;
+	import happymagic.model.vo.MixVo;
+	
+	/**
+	 * ...
+	 * @author jj
+	 */
+	public class TaskNeedItemView extends GridItem
+	{
+		private var iview:MovieClip;
+		private var size:Number;
+		private var rect:Rectangle;
+		private var mixvo:MixClassVo;
+		public var showEnough:Boolean;
+		public var data:ConditionVo;
+		public var showNeed:Boolean;
+		public var currentNum:uint;
+		public var needItem:ItemVo;
+		public function TaskNeedItemView(_ui:MovieClip, _size:Number, _rect:Rectangle,__showEnough:Boolean=false) 
+		{
+			showEnough = __showEnough;
+			size = _size;
+			rect = _rect;
+			super(_ui);
+			iview = _ui;
+		}
+		
+		override public function setData(value:Object):void {
+			
+			
+			data = value as ConditionVo;
+			
+			currentNum = data.currentNum;
+			
+			var body:Sprite;
+			var enough:Boolean;
+			var currentNum:uint;
+			
+			var showName:String="";
+			switch (data.type) 
+			{
+				
+				case ConditionType.ITEM:
+				needItem = DataManager.getInstance().itemData.getItem(data.id);
+				body = new IconView(size, size, rect) as Sprite;
+				(body as IconView).setData(needItem.base.className);
+				showName = needItem.base.name;
+				iview["numTxt"].text = data.num.toString();
+				break;
+				
+				case ConditionType.USER:
+				body = new IconView(size, size, rect) as Sprite;
+				(body as IconView).setData("conditionNeedIcon",data.id);
+				showName = LocaleWords.getInstance().getWord("conditionName_" + data.id);
+				iview["numTxt"].text = "+" + data.num.toString();
+				break;
+				
+				case ConditionType.MIX:
+				mixvo = DataManager.getInstance().mixData.getMixClass(uint(data.id));
+				body = new IconView(size, size, rect) as Sprite;
+				var tmpitem:BaseItemClassVo = DataManager.getInstance().itemData.getItemClass(mixvo.itemCid);
+				(body as IconView).setData(tmpitem.className);
+				showName = mixvo.name;
+				break;
+				
+				case ConditionType.SCENE_UPGRADE:
+				//body = new IconView(size, size, rect) as Sprite;
+				//(body as IconView).setData("sceneUpgradeIcon");
+				//LocaleWords.getInstance().getWord("roomUp");
+				//iview["numTxt"].text = data.num.toString() + "x" + data.num.toString();
+				break;
+				
+			}
+			
+			if (iview["nameTxt"]) iview["nameTxt"].text = showName;
+			
+			enough = currentNum >= data.num;
+			
+			var outStr:String;
+			if (showNeed) 
+			{
+				outStr = currentNum.toString() + "/" + data.num.toString();
+			}else {
+				//outStr = data.num.toString();
+				outStr = iview["numTxt"].text;
+			}
+			
+			if (enough || !showEnough) 
+			{
+				HtmlTextTools.setTxtSaveFormat(iview["numTxt"],outStr,0x000000);
+			}else {
+				HtmlTextTools.setTxtSaveFormat(iview["numTxt"],outStr,0xff0000);
+			}
+			
+			iview.addChildAt(body, 1);
+			
+			if(showName) Tooltips.getInstance().register(iview, showName, Tooltips.getInstance().getBg("defaultBg"));
+		}
+		
+	}
+
+}

@@ -1,0 +1,112 @@
+package happymagic.display.view.resolve 
+{
+	import flash.display.MovieClip;
+	import flash.display.Sprite;
+	import flash.events.Event;
+	import flash.events.MouseEvent;
+	import happyfish.display.view.UISprite;
+	import happymagic.display.view.ModuleDict;
+	import happymagic.display.view.ui.AwardResultView;
+	import happymagic.manager.DataManager;
+	import happymagic.manager.DisplayManager;
+	import happymagic.model.command.ResolveRequestCommand;
+	import happymagic.model.vo.ConditionType;
+	import happymagic.model.vo.ConditionVo;
+	import happymagic.model.vo.ResolveVo;
+	import happymagic.model.vo.ResultVo;
+	/**
+	 * ...
+	 * @author zc
+	 */
+	public class ResolveView extends UISprite
+	{
+		private var iview:MovieClip;
+		private var data:ResolveVo;
+		private var num:int = 1;
+		public function ResolveView() 
+		{
+			_view = new MovieClip();
+			iview = _view as MovieClip;
+			iview.addEventListener(MouseEvent.CLICK, clickrun);
+		}
+		
+		private function clickrun(e:MouseEvent):void 
+		{
+			switch(e.target.name)
+			{
+				case "yesbtn":
+				
+				 iview.mouseChildren = false;
+				 iview.mouseEnabled = false;
+				 var resolveRequestCommand:ResolveRequestCommand = new ResolveRequestCommand();
+				 resolveRequestCommand.setdata(data.decorId, num);
+				 resolveRequestCommand.addEventListener(Event.COMPLETE,resolveRequestCommandComplete)
+				break;
+				
+				case "nobtn":
+				     closeMe(true);
+				break
+				
+				case "add":
+				      num ++;
+					  
+					  for (var i :int = 0; i < data.item.length; i++ )
+					  {
+						  if (DataManager.getInstance().getDecorNum(data.item[i][0]) < num)
+						  {
+							  num--;
+							  return;
+						  }
+					  }
+				break;
+				
+				case "reduce":
+				      num --;				  
+					  if(num == 0)
+					  {
+					    num == 1;
+					  }
+				break;
+			}
+			
+		}
+		
+		private function resolveRequestCommandComplete(e:Event):void 
+		{
+			iview.mouseEnabled = true;
+			iview.mouseChildren = true;
+
+			var awards:Array = new Array();
+			var i:int = 0;
+			
+			if (e.target.data.result.status == ResultVo.SUCCESS) 
+			{
+		        if (e.target.data.addItem)
+				    {
+					    for (i = 0; i < e.target.data.addItem.length; i++) 
+					    {
+						    awards.push(new ConditionVo().setData( { type:ConditionType.ITEM, id:e.target.data.addItem[i].i_id, num:e.target.data.addItem[i].num } ));
+					    }
+				    }
+				
+			    if (e.target.data.addDecorBag)
+				    {
+					    for (i = 0; i < e.target.data.addDecorBag.length; i++) 
+					    {
+						    awards.push(new ConditionVo().setData( { type:ConditionType.DECOR, id:e.target.data.addDecorBag[i].d_id, num:e.target.data.addDecorBag[i].num } ));
+					    }
+				    }				
+			}
+			
+				var awardwin:AwardResultView = DisplayManager.uiSprite.addModule(ModuleDict.MODULE_AWARD_RESULT, ModuleDict.MODULE_AWARD_RESULT_CLASS,true) as AwardResultView;
+				awardwin.setData( { name:"分解获得", awards:awards } );			
+		}
+		
+		public function setData(id:int):void
+		{
+			data = DataManager.getInstance().getResolveVoByDecorId(id);
+		}
+		
+	}
+
+}

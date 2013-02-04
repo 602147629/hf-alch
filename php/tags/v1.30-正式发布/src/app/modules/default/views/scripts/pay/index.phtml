@@ -1,0 +1,38 @@
+<link href="{%$staticUrl%}/alchemy/pay_2012070101.css?v=1.00" rel="stylesheet" type="text/css" />
+<div class="main">
+	<div style="height:850px;width:791px;background-color:#fcdf95;padding:10px;border-left:2px solid #5e3929;border-right:2px solid #5e3929;border-bottom:2px solid #5e3929;">
+		<div style="height:850px;background-color:#fffcf5;">
+			<form id="frmPayOrder" method="get" target="_blank" action="{%$baseUrl%}/pay/route" style="padding-top:1px">
+				<input type="hidden" id="skey" name="skey" value="{%$skey%}" />
+				<input type="hidden" id="type_id" name="type_id" value="" />
+	{% foreach from=$section key=k item=v %}
+	{% if $v.open == 1 %}
+				<div class="chongzhi">
+					<div class="chongzhi-bg">
+					<div class="chongzhi-ed"><img src="{%$staticUrl%}/alchemy/image/pay/{%$v.gold.img%}" title="{%$v.gold.title%}" /></div>
+	{% foreach from=$v.include item=v2 %}
+	{% if $v2.cid>0 && $v2.num>0 %}
+						<div class="chongzhi-item">
+	{% if $v2.limit == 1 %}
+	                    	<div class="xian"><img src="{%$staticUrl%}/alchemy/image/pay/timelimit.gif" /></div>
+	{% /if %}
+							<img src="{%$staticUrl%}/alchemy/image/pay/include/item/{%$v2.cid%}.png" />
+						</div>
+	{% /if %}
+	{% /foreach %}
+					</div>
+					<div class="chongzhi-bt"><input type="image" src="{%$staticUrl%}/alchemy/image/pay/{%$v.btn.img%}" name="btnOrder{%$k%}" id="btnOrder{%$k%}" value="充值" class="orderbtn" onclick="HFPay.post('frmPayOrder', {%$v.id%});return false;" /></div>
+				</div>
+	{% /if %}
+	{% /foreach %}
+			</form>
+			<div class="clear"></div>
+		    <div class="xianshi" style="width:720px;height:80px;clear:both;margin-left:40px;padding-top:15px;">
+		    	{%$note%}
+		    </div>
+			<div style="color:grey;padding:20px 10px 20px 40px;">
+		        <span>客服提示：如果有支付相关的疑问，请QQ联系游戏客服QQ：2414377107</span>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,1 @@
+{"result":{"status":1,"content":"","levelUP":false,"coin":0,"gem":0,"exp":40,"mp":-40,"roomLevelUp":0},"changeStudent":{"sid":"5","decor_id":"1","state":2,"time":60,"magic_id":"1004","event_time":40,"coin":"166","stone_time":17340,"can_steal":0},"changeStudentState":{"sid":"5","exp":1,"level":0,"needAward":0,"student_state":2}}

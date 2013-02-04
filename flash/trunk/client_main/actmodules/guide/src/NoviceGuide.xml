@@ -1,0 +1,706 @@
+xml=
+<list>
+	<guide id="1" hasMasker="true" name="第一次出村">
+		<prevStepList>
+			<stepStep>
+				<promptlyHandler><![CDATA[{if}('{story}.has', '{goto}(waitStory)', '{goto}(showArrow)')]]></promptlyHandler>
+			</stepStep>
+			<stepStep id="waitStory">
+				<promptlyHandler><![CDATA[({story}.end2(11,1,showArrow),{helper}.hideMasker())]]></promptlyHandler>
+			</stepStep>
+			<stepStep id="showArrow">
+				<promptlyHandler><![CDATA[({unlock}(goVillage),{helper}.showMasker())]]></promptlyHandler>
+				<tip>点击出村按钮</tip>
+				<actTips><![CDATA[{module}.getView(rightMenu).goVillageBtn]]></actTips>
+				<container><![CDATA[{stage}]]></container>
+				<toNextMouseList>
+					<mouseEvent>
+						<target><![CDATA[{module}.getView(rightMenu).goVillageBtn]]></target>
+					</mouseEvent>
+				</toNextMouseList>
+				<testVars ui="{module}.getView(rightMenu).goVillageBtn" />
+				<addList>
+					<expr><![CDATA[{ui}.stage]]></expr>
+					<expr><![CDATA[{ui}.visible]]></expr>
+				</addList>
+			</stepStep>
+			<stepStep>
+				<promptlyHandler><![CDATA[{scene}.dataEnd2(1,atVillage)]]></promptlyHandler>
+			</stepStep>
+			<stepStep id="atVillage">
+				<promptlyHandler><![CDATA[({sendStep}({curStep}()),{scene}.end2(1,checkStory2))]]></promptlyHandler>
+			</stepStep>
+			<stepStep id="checkStory2">
+				<promptlyHandler><![CDATA[{if}('{story}.has','{goto}(waitStory2)','{goto}(goHome)')]]></promptlyHandler>
+			</stepStep>
+			<stepStep id="waitStory2">
+				<promptlyHandler><![CDATA[({story}.end2(21,1,waitBattle),{stageEnabled}(),{helper}.hideMasker())]]></promptlyHandler>
+			</stepStep>
+			<stepStep id="waitBattle">
+				<promptlyHandler><![CDATA[{battle}.toPlayer(1,pointAkt)]]></promptlyHandler>
+			</stepStep>
+			<stepStep id="pointAkt">
+				<promptlyHandler><![CDATA[{helper}.showMasker()]]></promptlyHandler>
+				<radius>25</radius>
+				<actTips><![CDATA[{battle}.aktBtnPoint]]></actTips>
+				<container><![CDATA[{stage}]]></container>
+				<toNextMouseList>
+					<mouseEvent>
+						<target><![CDATA[{stage}]]></target>
+					</mouseEvent>
+				</toNextMouseList>
+			</stepStep>
+			<stepStep id="pointMob">
+				<radius>30</radius>
+				<actTips><![CDATA[{battle}.firstMobPoint]]></actTips>
+				<container><![CDATA[{stage}]]></container>
+				<toNextMouseList>
+					<mouseEvent>
+						<target><![CDATA[{stage}]]></target>
+					</mouseEvent>
+				</toNextMouseList>
+			</stepStep>
+			<stepStep id="waitBattleFinish">
+				<promptlyHandler><![CDATA[({helper}.hideMasker(),{battle}.end2(1,waitStory3))]]></promptlyHandler>
+			</stepStep>
+			<stepStep id="waitStory3">
+				<promptlyHandler><![CDATA[{story}.end2(xxx,1,goHome)]]></promptlyHandler>
+			</stepStep>
+			<stepStep id="goHome">
+				<promptlyHandler><![CDATA[{helper}.showMasker()]]></promptlyHandler>
+				<actTips><![CDATA[{module}.getView(rightMenu).goHomeBtn]]></actTips>
+				<container><![CDATA[{stage}]]></container>
+				<toNextMouseList>
+					<mouseEvent>
+						<target><![CDATA[{module}.getView(rightMenu).goHomeBtn]]></target>
+					</mouseEvent>
+				</toNextMouseList>
+				<addList>
+				</addList>
+			</stepStep>
+			<stepStep>
+				<promptlyHandler><![CDATA[{scene}.dataEnd2(1,finish)]]></promptlyHandler>
+			</stepStep>
+			<stepStep id="finish">
+				<promptlyHandler><![CDATA[({sendFinish}(),{helper}.finishCurrGuide())]]></promptlyHandler>
+			</stepStep>
+		</prevStepList>
+		<nextStepList>
+		</nextStepList>
+		<stepFinishList>
+			<stepFinish>
+				<type>noviceGuideHelper_TASK_COMPLETED</type>
+				<addList>
+					<expr><![CDATA[{event}.data=={helper}.currGuideId]]></expr>
+				</addList>
+			</stepFinish>
+		</stepFinishList>
+	</guide>
+	<guide id="2" hasMasker="true" name="合成">
+		<prevStepList>
+			<stepStep>
+				<promptlyHandler><![CDATA[{scene}.end2(2, checkStory)]]></promptlyHandler>
+			</stepStep>
+			<stepStep id="checkStory">
+				<promptlyHandler><![CDATA[{if}('{story}.has', '{goto}(waitStory)', '{goto}(checkUnlock)')]]></promptlyHandler>
+			</stepStep>
+			<stepStep id="waitStory">
+				<promptlyHandler><![CDATA[({helper}.hideMasker(),{story}.end2(41,2,checkUnlock))]]></promptlyHandler>
+			</stepStep>
+			<stepStep id="checkUnlock">
+				<promptlyHandler><![CDATA[({helper}.showMasker(),{if}('{hasLock}(itembox)','{goto}(unlock)','{goto}(checkFurnace)'))]]></promptlyHandler>
+			</stepStep>
+			<stepStep id="unlock">
+				<promptlyHandler><![CDATA[({unlock}(itembox),{unlock}(diy),{goto}(checkFurnace))]]></promptlyHandler>
+			</stepStep>
+			<stepStep id="checkFurnace">
+				<promptlyHandler><![CDATA[{if}('{scene}.getFurnace(141)','{goto}(pointFurnace)','{goto}(pointItembox)')]]></promptlyHandler>
+			</stepStep>
+			<stepStep id="pointItembox">
+				<promptlyHandler><![CDATA[({helper}.showMasker(),{diy}.removePutEvent(),{diy}.removeCancelPutEvent())]]></promptlyHandler>
+				<tip>点击背包</tip>
+				<actTips><![CDATA[{module}.getView(menu).itemboxBtn]]></actTips>
+				<container><![CDATA[{stage}]]></container>
+				<toNextMouseList>
+					<mouseEvent>
+						<target><![CDATA[{module}.getView(menu).itemboxBtn]]></target>
+					</mouseEvent>
+				</toNextMouseList>
+				<testVars ui="{module}.getView(menu).itemboxBtn" />
+				<addList>
+					<expr><![CDATA[{ui}.stage]]></expr>
+					<expr><![CDATA[{ui}.visible]]></expr>
+				</addList>
+			</stepStep>
+			<stepStep>
+				<tip>选择炼金炉</tip>
+				<radius>32</radius>
+				<actTips><![CDATA[{module}.getModule(StorageView).getItemView(141).placeBtn]]></actTips>
+				<container><![CDATA[{stage}]]></container>
+				<toNextMouseList>
+					<mouseEvent>
+						<target><![CDATA[{module}.getModule(StorageView).getItemView(141).placeBtn]]></target>
+					</mouseEvent>
+				</toNextMouseList>
+				<addList>
+					<expr><![CDATA[{module}.getView(StorageView).alpha==1.0]]></expr>
+				</addList>
+			</stepStep>
+			<stepStep>
+				<tip>选择空地摆放</tip>
+				<promptlyHandler><![CDATA[({diy}.put2(2,pointFurnace),{diy}.cancelPut2(2,pointItembox),{helper}.hideMasker())]]></promptlyHandler>
+			</stepStep>
+			<stepStep id="pointFurnace">
+				<promptlyHandler><![CDATA[({diy}.removePutEvent(),{diy}.removeCancelPutEvent(),{helper}.showMasker())]]></promptlyHandler>
+				<tip>点击炼金炉</tip>
+				<actTips><![CDATA[{scene}.getFurnace(141).view.container]]></actTips>
+				<container><![CDATA[{stage}]]></container>
+				<toNextMouseList>
+					<mouseEvent>
+						<target><![CDATA[{scene}.getFurnace(141).view.container]]></target>
+					</mouseEvent>
+				</toNextMouseList>
+				<addList>
+					<expr><![CDATA[{scene}.getFurnace(141).view.container]]></expr>
+				</addList>
+			</stepStep>
+			<stepStep id="checkFurnaceIdl">
+				<promptlyHandler><![CDATA[{if}('{scene}.furnaceState(141)==idl','{goto}(pointMixItem)','{goto}(checkFurnaceWorking)')]]></promptlyHandler>
+			</stepStep>
+			<stepStep id="checkFurnaceWorking">
+				<promptlyHandler><![CDATA[{if}('{scene}.furnaceState(141)==working','{goto}(pointImmediatelyComplete)','{goto}(checkFurnaceComplete)')]]></promptlyHandler>
+			</stepStep>
+			<stepStep id="checkFurnaceComplete">
+				<promptlyHandler><![CDATA[{if}('{scene}.furnaceState(141)==complete','{goto}(finishGuide)')]]></promptlyHandler>
+			</stepStep>
+			<stepStep id="pointMixItem">
+				<tip>选择制造木材</tip>
+				<radius>32</radius>
+				<actTips><![CDATA[{module}.getModule(mixListView).getItemView(1001).buildBtn]]></actTips>
+				<container><![CDATA[{stage}]]></container>
+				<toNextMouseList>
+					<mouseEvent>
+						<target><![CDATA[{module}.getModule(mixListView).getItemView(1001).buildBtn]]></target>
+					</mouseEvent>
+				</toNextMouseList>
+				<testVars ui="{module}.getView(mixListView)" />
+				<addList>
+					<expr><![CDATA[{ui}.alpha==1]]></expr>
+					<expr><![CDATA[{ui}.parent]]></expr>
+				</addList>
+			</stepStep>
+			<stepStep>
+				<tip>点击开始制造</tip>
+				<actTips><![CDATA[{module}.getModule(mixListView).mixView.buildBtn]]></actTips>
+				<container><![CDATA[{stage}]]></container>
+				<toNextMouseList>
+					<mouseEvent>
+						<target><![CDATA[{module}.getModule(mixListView).mixView.buildBtn]]></target>
+					</mouseEvent>
+				</toNextMouseList>
+				<addList>
+					<expr><![CDATA[{module}.getModule(mixListView).mixView.parent]]></expr>
+				</addList>
+			</stepStep>
+			<stepStep>
+				<promptlyHandler><![CDATA[{delayCall}('{goto}(pointFurnace)', 2000)]]></promptlyHandler>
+			</stepStep>
+			<stepStep id="pointImmediatelyComplete">
+				<tip>点击立刻完成</tip>
+				<actTips><![CDATA[{module}.getView(mixImmediateCompleteView).completeBtn]]></actTips>
+				<container><![CDATA[{stage}]]></container>
+				<toNextMouseList>
+					<mouseEvent>
+						<target><![CDATA[{module}.getView(mixImmediateCompleteView).completeBtn]]></target>
+					</mouseEvent>
+				</toNextMouseList>
+				<addList>
+					<expr><![CDATA[{module}.getView(mixImmediateCompleteView).alpha==1]]></expr>
+				</addList>
+			</stepStep>
+			<stepStep id="finishGuide">
+				<promptlyHandler><![CDATA[({sendFinish}(),{helper}.finishCurrGuide())]]></promptlyHandler>
+			</stepStep>
+		</prevStepList>
+		<nextStepList>
+		</nextStepList>
+		<stepFinishList>
+			<stepFinish>
+				<type>noviceGuideHelper_TASK_COMPLETED</type>
+				<addList>
+					<expr><![CDATA[{event}.data=={helper}.currGuideId]]></expr>
+				</addList>
+			</stepFinish>
+		</stepFinishList>
+	</guide>
+	<guide id="3" hasMasker="true" name="订单">
+		<prevStepList>
+			<stepStep>
+				<promptlyHandler><![CDATA[({order}.notRequest(),{scene}.end2(3, checkStory))]]></promptlyHandler>
+			</stepStep>
+			<stepStep id="checkStory">
+				<promptlyHandler><![CDATA[{if}('{story}.has','{goto}(waitStory)', '{goto}(checkUnlock)')]]></promptlyHandler>
+			</stepStep>
+			<stepStep id="waitStory">
+				<promptlyHandler><![CDATA[{story}.end2(51,3,checkUnlock)]]></promptlyHandler>
+			</stepStep>
+			<stepStep id="checkUnlock">
+				<promptlyHandler><![CDATA[{if}('{hasLock}(order)','{goto}(unlock)','{goto}(checkAccept)')]]></promptlyHandler>
+			</stepStep>
+			<stepStep id="unlock">
+				<promptlyHandler><![CDATA[({unlock}(order),{goto}(requestOrder))]]></promptlyHandler>
+			</stepStep>
+			<stepStep id="checkAccept">
+				<promptlyHandler><![CDATA[{if}('{order}.hasAccept()','{goto}(pointMyOrderBtn)','{goto}(checkUnaccept)')]]></promptlyHandler>
+			</stepStep>
+			<stepStep id="checkUnaccept">
+				<promptlyHandler><![CDATA[{if}('{order}.hasUnaccept()','{goto}(pointCustomer)','{goto}(requestOrder)')]]></promptlyHandler>
+			</stepStep>
+			<stepStep id="requestOrder">
+				<promptlyHandler><![CDATA[({order}.requestOrder(),{goto}(pointCustomer))]]></promptlyHandler>
+			</stepStep>
+			<stepStep id="pointCustomer">
+				<tip>点击订单小人</tip>
+				<actTips><![CDATA[{order}.getCustomerView]]></actTips>
+				<container><![CDATA[{stage}]]></container>
+				<toNextMouseList>
+					<mouseEvent>
+						<target><![CDATA[{order}.getCustomerView]]></target>
+					</mouseEvent>
+				</toNextMouseList>
+				<addList>
+					<expr><![CDATA[{order}.notMovingCustomer]]></expr>
+				</addList>
+			</stepStep>
+			<stepStep>
+				<tip>点击接受</tip>
+				<actTips><![CDATA[{module}.getView(OrderDescriptionUISprite).okBtn]]></actTips>
+				<container><![CDATA[{stage}]]></container>
+				<toNextMouseList>
+					<mouseEvent>
+						<target><![CDATA[{module}.getView(OrderDescriptionUISprite).okBtn]]></target>
+					</mouseEvent>
+				</toNextMouseList>
+				<testVars ui="{module}.getView(OrderDescriptionUISprite)" />
+				<addList>
+					<expr><![CDATA[{ui}.stage]]></expr>
+					<expr><![CDATA[{ui}.alpha==1]]></expr>
+				</addList>
+			</stepStep>
+			<stepStep id="pointMyOrderBtn">
+				<tip>点击订单</tip>
+				<actTips><![CDATA[{module}.getModule(rightCenterMenu).getMc(order)]]></actTips>
+				<container><![CDATA[{stage}]]></container>
+				<toNextMouseList>
+					<mouseEvent>
+						<target><![CDATA[{module}.getModule(rightCenterMenu).getMc(order)]]></target>
+					</mouseEvent>
+				</toNextMouseList>
+				<addList>
+					<expr><![CDATA[{module}.getModule(rightCenterMenu).getMc(order).stage]]></expr>
+				</addList>
+			</stepStep>
+			<stepStep>
+				<tip>点击交付</tip>
+				<actTips><![CDATA[{module}.getModule(MyOrderListUISprite).getFirstView().completeBtn]]></actTips>
+				<container><![CDATA[{stage}]]></container>
+				<toNextMouseList>
+					<mouseEvent>
+						<target><![CDATA[{module}.getModule(MyOrderListUISprite).getFirstView().completeBtn]]></target>
+					</mouseEvent>
+				</toNextMouseList>
+				<testVars ui="{module}.getView(MyOrderListUISprite)" />
+				<addList>
+					<expr><![CDATA[{ui}.stage]]></expr>
+					<expr><![CDATA[{ui}.alpha==1]]></expr>
+				</addList>
+			</stepStep>
+			<stepStep>
+				<promptlyHandler><![CDATA[({sendFinish}(),{helper}.finishCurrGuide(),{order}.autoRequest())]]></promptlyHandler>
+			</stepStep>
+		</prevStepList>
+		<nextStepList></nextStepList>
+		<stepFinishList>
+			<stepFinish>
+				<type>reciveComplete</type>
+			</stepFinish>
+		</stepFinishList>
+	</guide>
+	<guide id="4" hasMasker="true" name="第二次出村">
+		<prevStepList>
+			<stepStep>
+				<promptlyHandler><![CDATA[{scene}.end2(4, checkStory)]]></promptlyHandler>
+			</stepStep>
+			<stepStep id="checkStory">
+				<promptlyHandler><![CDATA[{if}('{story}.has','{goto}(waitStory)', '{goto}(pointVillageBtn)')]]></promptlyHandler>
+			</stepStep>
+			<stepStep id="waitStory">
+				<promptlyHandler><![CDATA[{story}.end2(61,4,pointVillageBtn)]]></promptlyHandler>
+			</stepStep>
+			<stepStep id="pointVillageBtn">
+				<tip>点击出村</tip>
+				<actTips><![CDATA[{module}.getView(rightMenu).goVillageBtn]]></actTips>
+				<container><![CDATA[{stage}]]></container>
+				<toNextMouseList>
+					<mouseEvent>
+						<target><![CDATA[{module}.getView(rightMenu).goVillageBtn]]></target>
+					</mouseEvent>
+				</toNextMouseList>
+				<addList>
+				</addList>
+			</stepStep>
+			<stepStep>
+				<promptlyHandler><![CDATA[({sendStep}({curStep}()),{scene}.end2(4, pointNpc))]]></promptlyHandler>
+			</stepStep>
+			<stepStep id="pointNpc">
+				<tip>点击NPC</tip>
+				<actTips><![CDATA[{scene}.getNpc(15).view.container]]></actTips>
+				<container><![CDATA[{scene}.camera]]></container>
+				<toNextMouseList>
+					<mouseEvent>
+						<target><![CDATA[{scene}.getNpc(15).view.container]]></target>
+					</mouseEvent>
+				</toNextMouseList>
+				<addList>
+					<expr><![CDATA[{scene}.getNpc(15).view.container.stage]]></expr>
+				</addList>
+			</stepStep>
+			<stepStep>
+				<promptlyHandler><![CDATA[({helper}.hideMasker(),{story}.npcChatEnd2(4, pointAward))]]></promptlyHandler>
+			</stepStep>
+			<stepStep id="pointAward">
+				<promptlyHandler><![CDATA[({helper}.showMasker(),{sendFinish}(),{goto}(finish))]]></promptlyHandler>
+				
+			</stepStep>
+			<stepStep id="finish">
+				<promptlyHandler><![CDATA[{helper}.finishCurrGuide()]]></promptlyHandler>
+			</stepStep>
+		</prevStepList>
+		<nextStepList></nextStepList>
+		<stepFinishList>
+			<stepFinish>
+				<type>reciveComplete</type>
+			</stepFinish>
+		</stepFinishList>
+	</guide>
+	<!-- 
+	<guide id="15" hasMasker="true" name="使用配方">
+		<prevStepList>
+			<stepStep>
+				<promptlyHandler><![CDATA[{scene}.end2(15,checkStory)]]></promptlyHandler>
+			</stepStep>
+			<stepStep id="checkStory">
+				<promptlyHandler><![CDATA[{if}('{story}.has','{goto}(waitStory)', '{goto}(pointItembox)')]]></promptlyHandler>
+			</stepStep>
+			<stepStep id="waitStory">
+				<promptlyHandler><![CDATA[{story}.end2(xxxxx,15,pointItembox)]]></promptlyHandler>
+			</stepStep>
+			<stepStep id="pointItembox">
+				<actTips><![CDATA[{module}.getView(menu).itemboxBtn]]></actTips>
+				<container><![CDATA[{stage}]]></container>
+				<toNextMouseList>
+					<mouseEvent>
+						<target><![CDATA[{module}.getView(menu).itemboxBtn]]></target>
+					</mouseEvent>
+				</toNextMouseList>
+			</stepStep>
+			<stepStep>
+				<actTips><![CDATA[{module}.getModule(StorageView).getItemView(141).placeBtn]]></actTips>
+				<container><![CDATA[{stage}]]></container>
+				<toNextMouseList>
+					<mouseEvent>
+						<target><![CDATA[{module}.getModule(StorageView).getItemView(141).placeBtn]]></target>
+					</mouseEvent>
+				</toNextMouseList>
+				<addList>
+					<expr><![CDATA[{module}.getView(StorageView).alpha==1.0]]></expr>
+				</addList>
+			</stepStep>
+		</prevStepList>
+		<nextStepList></nextStepList>
+		<stepFinishList>
+			<stepFinish>
+				<type>reciveComplete</type>
+			</stepFinish>
+		</stepFinishList>
+	</guide>
+	 -->
+	<guide id="5" hasMasker="true" name="冒险">
+		<prevStepList>
+			<stepStep>
+				<promptlyHandler><![CDATA[{scene}.end2(5, checkStory)]]></promptlyHandler>
+			</stepStep>
+			<stepStep id="checkStory">
+				<promptlyHandler><![CDATA[{if}('{story}.has','{goto}(waitStory)', '{goto}(checkUnlock)')]]></promptlyHandler>
+			</stepStep>
+			<stepStep id="waitStory">
+				<promptlyHandler><![CDATA[({helper}.hideMasker(),{story}.end2(xxxxx,5,checkUnlock))]]></promptlyHandler>
+			</stepStep>
+			<stepStep id="checkUnlock">
+				<promptlyHandler><![CDATA[({helper}.showMasker(),{if}('{hasLock}(worldMap)','{goto}(unlock)','{goto}(pointWorldMapBtn)'))]]></promptlyHandler>
+			</stepStep>
+			<stepStep id="unlock">
+				<promptlyHandler><![CDATA[({unlock}(worldMap),{goto}(pointWorldMapBtn))]]></promptlyHandler>
+			</stepStep>
+			<stepStep id="pointWorldMapBtn">
+				<promptlyHandler><![CDATA[{helper}.showMasker()]]></promptlyHandler>
+				<tip>点击冒险按钮</tip>
+				<actTips><![CDATA[{module}.getView(rightMenu).worldMapBtn]]></actTips>
+				<container><![CDATA[{stage}]]></container>
+				<toNextMouseList>
+					<mouseEvent>
+						<target><![CDATA[{module}.getView(rightMenu).worldMapBtn]]></target>
+					</mouseEvent>
+				</toNextMouseList>
+				<testVars ui="{module}.getView(rightMenu).worldMapBtn" />
+				<addList>
+					<expr><![CDATA[{ui}.stage]]></expr>
+					<expr><![CDATA[{ui}.visible]]></expr>
+				</addList>
+			</stepStep>
+			<stepStep>
+				<tip>点击矮人矿洞</tip>
+				<actTips><![CDATA[{module}.getModule(worldMapView).getbtnMc(mapicon4)]]></actTips>
+				<container><![CDATA[{stage}]]></container>
+				<toNextMouseList>
+					<mouseEvent>
+						<target><![CDATA[{module}.getModule(worldMapView).getbtnMc(mapicon4)]]></target>
+					</mouseEvent>
+				</toNextMouseList>
+				<addList>
+					<expr><![CDATA[{module}.getModule(worldMapView).getbtnMc(mapicon4)]]></expr>
+				</addList>
+			</stepStep>
+			<stepStep>
+				<promptlyHandler><![CDATA[{scene}.dataEnd2(5,finish)]]></promptlyHandler>
+			</stepStep>
+			<stepStep id="finish">
+				<promptlyHandler><![CDATA[({sendFinish}(),{helper}.removeAllGuide())]]></promptlyHandler>
+			</stepStep>
+		</prevStepList>
+		<nextStepList></nextStepList>
+		<stepFinishList>
+			<stepFinish>
+				<type>reciveComplete</type>
+			</stepFinish>
+		</stepFinishList>
+	</guide>
+	<guide id="6" hasMasker="true" name="设置角色">
+		<prevStepList>
+			<stepStep>
+				<promptlyHandler><![CDATA[{scene}.end2(6, checkStory)]]></promptlyHandler>
+			</stepStep>
+			<stepStep id="checkStory">
+				<promptlyHandler><![CDATA[{if}('{story}.has','{goto}(waitStory)', '{goto}(pointRoleInfoBtn)')]]></promptlyHandler>
+			</stepStep>
+			<stepStep id="waitStory">
+				<promptlyHandler><![CDATA[({helper}.hideMasker(),{story}.end2(111,6,pointRoleInfoBtn))]]></promptlyHandler>
+			</stepStep>
+			<stepStep id="pointRoleInfoBtn">
+				<promptlyHandler><![CDATA[({helper}.showMasker(), {unlock}(roleInfo))]]></promptlyHandler>
+				<tip>点击角色按钮</tip>
+				<actTips><![CDATA[{module}.getView(menu).roleInfoBtn]]></actTips>
+				<container><![CDATA[{stage}]]></container>
+				<toNextMouseList>
+					<mouseEvent>
+						<target><![CDATA[{module}.getView(menu).roleInfoBtn]]></target>
+					</mouseEvent>
+				</toNextMouseList>
+				<testVars ui="{module}.getView(menu).roleInfoBtn" />
+				<addList>
+					<expr><![CDATA[{ui}.stage]]></expr>
+					<expr><![CDATA[{ui}.visible]]></expr>
+				</addList>
+			</stepStep>
+			<stepStep>
+				<promptlyHandler><![CDATA[{if}('{role}.mainHasEquip()','{goto}(checkFormationShow)','{goto}(pointEquipReplaceBtn)')]]></promptlyHandler>
+			</stepStep>
+			<stepStep id="pointEquipReplaceBtn">
+				<tip>点击换按钮</tip>
+				<actTips><![CDATA[{module}.getModule(MySoldierListUISprite).roleView.equiReplaceBtn0]]></actTips>
+				<container><![CDATA[{stage}]]></container>
+				<toNextMouseList>
+					<mouseEvent>
+						<target><![CDATA[{module}.getModule(MySoldierListUISprite).roleView.equiReplaceBtn0]]></target>
+					</mouseEvent>
+				</toNextMouseList>
+				<testVars ui="{module}.getView(MySoldierListUISprite)" />
+				<addList>
+					<expr><![CDATA[{ui}.stage]]></expr>
+					<expr><![CDATA[{ui}.alpha==1]]></expr>
+				</addList>
+			</stepStep>
+			<stepStep>
+				<tip>选择一个武器</tip>
+				<actTips><![CDATA[{module}.getModule(ChooseEquipmentUISprite).getFirstAvailableView().okBtn]]></actTips>
+				<container><![CDATA[{stage}]]></container>
+				<toNextMouseList>
+					<mouseEvent>
+						<target><![CDATA[{module}.getModule(ChooseEquipmentUISprite).getFirstAvailableView().okBtn]]></target>
+					</mouseEvent>
+				</toNextMouseList>
+				<testVars ui="{module}.getModule(ChooseEquipmentUISprite).getFirstAvailableView()" />
+				<addList>
+					<expr><![CDATA[{ui}.stage]]></expr>
+					<expr><![CDATA[{ui}.alpha==1]]></expr>
+				</addList>
+			</stepStep>
+			<stepStep>
+				<tip>点击关闭按钮</tip>
+				<actTips><![CDATA[{module}.getView(ChooseEquipmentUISprite).closeBtn]]></actTips>
+				<container><![CDATA[{stage}]]></container>
+				<toNextMouseList>
+					<mouseEvent>
+						<target><![CDATA[{module}.getView(ChooseEquipmentUISprite).closeBtn]]></target>
+					</mouseEvent>
+				</toNextMouseList>
+			</stepStep>
+			<stepStep id="checkFormationShow">
+				<promptlyHandler><![CDATA[{if}('{role}.isShowFormationSet','{goto}(pointDragRole)','{goto}(pointFormationBtn)')]]></promptlyHandler>
+			</stepStep>
+			<stepStep id="pointFormationBtn">
+				<tip>点击阵型设置</tip>
+				<actTips><![CDATA[{module}.getView(MySoldierListUISprite).formationTab]]></actTips>
+				<container><![CDATA[{stage}]]></container>
+				<toNextMouseList>
+					<mouseEvent>
+						<target><![CDATA[{module}.getView(MySoldierListUISprite).formationTab]]></target>
+					</mouseEvent>
+				</toNextMouseList>
+				<testVars ui="{module}.getView(MySoldierListUISprite)" />
+				<addList>
+					<expr><![CDATA[{ui}.stage]]></expr>
+					<expr><![CDATA[{ui}.alpha==1]]></expr>
+				</addList>
+			</stepStep>
+			<stepStep id="pointDragRole">
+				<promptlyHandler><![CDATA[{role}.formationDragDrop2(6,pointDropRole,6,pointClose)]]></promptlyHandler>
+				<tip>提起阵型中的主角</tip>
+				<actTips><![CDATA[{role}.roleFormationNodeView]]></actTips>
+				<container><![CDATA[{stage}]]></container>
+				<addList>
+					<expr><![CDATA[{module}.getModule(MySoldierListUISprite).formationView]]></expr>
+				</addList>
+			</stepStep>
+			<stepStep id="pointDropRole">
+				<tip>放下主角到指定位置</tip>
+				<promptlyHandler><![CDATA[{role}.formationDragDrop2(6,pointDropRole,6,pointClose)]]></promptlyHandler>
+				<actTips><![CDATA[{role}.freeFormationNodeView]]></actTips>
+				<container><![CDATA[{stage}]]></container>
+			</stepStep>
+			<stepStep id="pointClose">
+				<tip>关闭面板</tip>
+				<actTips><![CDATA[{module}.getView(MySoldierListUISprite).closeBtn]]></actTips>
+				<container><![CDATA[{stage}]]></container>
+				<toNextMouseList>
+					<mouseEvent>
+						<target><![CDATA[{module}.getView(MySoldierListUISprite).closeBtn]]></target>
+					</mouseEvent>
+				</toNextMouseList>
+			</stepStep>
+			<stepStep>
+				<promptlyHandler><![CDATA[({sendFinish}(),{helper}.finishCurrGuide())]]></promptlyHandler>
+			</stepStep>
+		</prevStepList>
+		<nextStepList></nextStepList>
+		<stepFinishList>
+			<stepFinish>
+				<type>reciveComplete</type>
+			</stepFinish>
+		</stepFinishList>
+	</guide>
+	<guide id="7" hasMasker="true" name="装备技能">
+		<prevStepList>
+			<stepStep>
+				<promptlyHandler><![CDATA[{scene}.end2(7, checkStory)]]></promptlyHandler>
+			</stepStep>
+			<stepStep id="checkStory">
+				<promptlyHandler><![CDATA[{if}('{story}.has','{goto}(waitStory)', '{goto}(pointRoleInfoBtn)')]]></promptlyHandler>
+			</stepStep>
+			<stepStep id="waitStory">
+				<promptlyHandler><![CDATA[{story}.end2(121,7,pointRoleInfoBtn)]]></promptlyHandler>
+			</stepStep>
+			<stepStep id="pointRoleInfoBtn">
+				<tip>点击角色按钮</tip>
+				<actTips><![CDATA[{module}.getView(menu).roleInfoBtn]]></actTips>
+				<container><![CDATA[{stage}]]></container>
+				<toNextMouseList>
+					<mouseEvent>
+						<target><![CDATA[{module}.getView(menu).roleInfoBtn]]></target>
+					</mouseEvent>
+				</toNextMouseList>
+				<addList>
+					<expr><![CDATA[{module}.getView(menu).roleInfoBtn.stage]]></expr>
+				</addList>
+			</stepStep>
+			<stepStep id="checkRoleInfoShow">
+				<promptlyHandler><![CDATA[{if}('{role}.isRoleInfoSet','{goto}(pointSkillReplaceBtn)','{goto}(pointRoleInfoSetBtn)')]]></promptlyHandler>
+			</stepStep>
+			<stepStep id="pointRoleInfoSetBtn">
+				<tip>点击人物设置按钮</tip>
+				<actTips><![CDATA[{module}.getView(MySoldierListUISprite).roleTab]]></actTips>
+				<container><![CDATA[{stage}]]></container>
+				<toNextMouseList>
+					<mouseEvent>
+						<target><![CDATA[{module}.getView(MySoldierListUISprite).roleTab]]></target>
+					</mouseEvent>
+				</toNextMouseList>
+				<testVars ui="{module}.getView(MySoldierListUISprite)" />
+				<addList>
+					<expr><![CDATA[{ui}.stage]]></expr>
+					<expr><![CDATA[{ui}.alpha==1]]></expr>
+				</addList>
+			</stepStep>
+			<stepStep id="pointSkillReplaceBtn">
+				<tip>点击技能图标</tip>
+				<actTips><![CDATA[{module}.getModule(MySoldierListUISprite).roleView.skill0.skillReplaceBtn]]></actTips>
+				<container><![CDATA[{stage}]]></container>
+				<toNextMouseList>
+					<mouseEvent>
+						<target><![CDATA[{module}.getModule(MySoldierListUISprite).roleView.skill0.skillReplaceBtn]]></target>
+					</mouseEvent>
+				</toNextMouseList>
+				<testVars ui="{module}.getView(MySoldierListUISprite)" />
+				<addList>
+					<expr><![CDATA[{ui}.stage]]></expr>
+					<expr><![CDATA[{ui}.alpha==1]]></expr>
+				</addList>
+			</stepStep>
+			<stepStep>
+				<tip>选择一个技能并且装备</tip>
+				<actTips><![CDATA[{module}.getModule(SkillLearnUISprite).getFirstAvailableView().learnBtn]]></actTips>
+				<container><![CDATA[{stage}]]></container>
+				<toNextMouseList>
+					<mouseEvent>
+						<target><![CDATA[{module}.getModule(SkillLearnUISprite).getFirstAvailableView().learnBtn]]></target>
+					</mouseEvent>
+				</toNextMouseList>
+				<testVars ui="{module}.getModule(SkillLearnUISprite).getFirstAvailableView()" />
+				<addList>
+					<expr><![CDATA[{ui}.stage]]></expr>
+					<expr><![CDATA[{ui}.alpha==1]]></expr>
+				</addList>
+			</stepStep>
+			<stepStep>
+				<promptlyHandler><![CDATA[{sendFinish}()]]></promptlyHandler>
+				<tip>关闭面板</tip>
+				<actTips><![CDATA[{module}.getView(MySoldierListUISprite).closeBtn]]></actTips>
+				<container><![CDATA[{stage}]]></container>
+				<toNextMouseList>
+					<mouseEvent>
+						<target><![CDATA[{module}.getView(MySoldierListUISprite).closeBtn]]></target>
+					</mouseEvent>
+				</toNextMouseList>
+			</stepStep>
+			<stepStep>
+				<promptlyHandler><![CDATA[{helper}.finishCurrGuide()]]></promptlyHandler>
+			</stepStep>
+		</prevStepList>
+		<nextStepList></nextStepList>
+		<stepFinishList>
+			<stepFinish>
+				<type>reciveComplete</type>
+			</stepFinish>
+		</stepFinishList>
+	</guide>
+</list>

@@ -1,0 +1,282 @@
+<script type="text/javascript" src="http://game.weibo.com/media/center/javascript/bin/wyx.connect.js"></script>
+<script type="text/javascript">
+var HFApp_sinawb = {
+		appId: "{%$appId%}",
+		appHost: "{%$hostUrl%}",
+
+		feedapi2: function(title,content,img,description,para) {
+			if (description==undefined || description == null) {
+				description = '【勇者战恶龍】' + content;
+			}
+			if (para==undefined || para == null) {
+				para = '';
+			}
+			var opts = {
+			   method:'sendWeibo',
+			   params:{
+				  appId: HFApp_sinawb.appId,
+			      content: content,//引导用户输入信息，在输入区域显示
+			      imageUrl: img,//发送图片的URL
+			      title: title,//新鲜事标题,
+			      templateContent: description,//新鲜事默认发送内容（40个汉字以内，英文和数字算半个汉字
+			      link:"http://game.weibo.com/{%$smarty.const.APP_NAME%}/",//游戏入口链接（可选）
+			      actionText:"开始游戏",//游戏次链接文字（可选）
+			      actionUrl:"http://game.weibo.com/{%$smarty.const.APP_NAME%}/index?"+ para//游戏次链接（可选）
+			   }
+			};
+			WYX.Connect.send(opts,function(data){
+			    //callBack function
+				//alert('feed send done');
+			});
+	    },
+
+	    feed: function(feedSettings) {
+			try {
+				if (feedSettings) {
+					var title = '勇者战恶龍';
+					var content = feedSettings.text;
+					var templateContent = feedSettings.templateContent;//'分享这一刻，来说点什么吧';
+					var img = feedSettings.img;
+					//var content = 'test1';
+					//var templateContent = 'teset1';//'分享这一刻，来说点什么吧';
+					//var img = 'http://ww3.sinaimg.cn/large/9d55147bjw1dtf7xu6ftzj.jpg';
+					
+					var link = "http://game.weibo.com/{%$smarty.const.APP_NAME%}/";
+					var actionUrl = 'http://game.weibo.com/{%$smarty.const.APP_NAME%}/';
+					var actionText = '开始游戏';
+					if (feedSettings.linktext) {
+						actionText = feedSettings.linktext;
+					}
+					if (feedSettings.para) {
+						actionUrl += 'index?' + feedSettings.para;
+						link += 'index?' + feedSettings.para;
+					}
+
+			    	var opts = {
+			    		method:'sendWeibo',
+						params:{
+							appId: HFApp_sinawb.appId,
+					      	content: content,
+					      	imageUrl: img,
+					      	title: title,
+					      	templateContent: templateContent,
+					      	link:link,
+					      	actionText:actionText,
+					      	actionUrl:actionUrl
+						}
+			    	};
+			    	$('#main_content').css('left', -9999);
+					WYX.Connect.send(opts,function(data){
+					    //callBack function
+						if (window.console && console.debug) {
+			    			console.debug('feed sent');
+			    			HFApp_sinawb.fireDelay();
+				  		}
+						$('#main_content').css('left', 0);
+					});
+				}
+			}catch(e){}
+	    },
+
+	    //function showFlash()
+	    //{
+	    //	document.getElementById("flashdiv").style.visibility="visible";
+	    	//$('#flashdiv').show("fast");
+	    //} 
+	    
+	    resize: function(height) {
+	    	WYX.Connect.init();
+	    	WYX.Connect.resizeHeight(height);
+		},
+
+		achieve: function(achvId) {
+			var opts = {
+			   method:'achievement',
+			   params:{
+			      appId: HFApp_sinawb.appId,
+			      achvId: achvId,//'成就的ID',
+			      mode:WidgetMode.NORMAL //发送成就信息弹出框，展现方式，WidgetMode.NORMAL|WidgetMode.MINI默认为 WidgetMode.NORMAL
+			   }
+			}
+
+			WYX.Connect.send(opts,function(data){
+			    //callBack function
+			});
+		},
+
+		rank: function(rankId, value) {
+			var opts = {
+			   method:'leaderboards',
+			   params:{
+			      appId: HFApp_sinawb.appId,
+			      leaderboardId: rankId,//排行ID
+			      value: value,//排行值
+			      mode:WidgetMode.NORMAL //发送成就信息弹出框，展现方式，WidgetMode.NORMAL|WidgetMode.MINI默认为 WidgetMode.NORMAL
+			   }
+			}
+			WYX.Connect.send(opts,function(data){
+			  //callBack function
+			});
+		},
+
+	    invite: function(actor, target, targetName, callbackUrl) {
+	    	var opts = {
+	 		   method:'invite',
+	 		   params:{
+	 			  appId: HFApp_sinawb.appId,
+	 		      uid: actor, //'当前用户的ID',
+	 		      friends: [{id: target, name: targetName}], //[{id:'好友的ID',name:'好友'}],
+	 		      content: '欢迎加入',
+	 		      title: '快来一起玩勇者战恶龍吧',
+	 		      action: callbackUrl//'邀请form的action属性，用户发送邀请后，被邀请人的ID（参数名: ids[]）会提交给此URL'
+	 		   }
+	 		};
+	 		WYX.Connect.send(opts,function(data){
+	 		    //callBack function
+	 			//alert('invite done');
+				//alert(data);
+	 		});
+	    },
+
+	    setMode: function(mode) {
+		    //WidgetMode.NORMAL 	0 	int 	成就或排行widget弹出方式，正常的
+	    	//WidgetMode.MINI 		1 	int 	成就或排行widget弹出方式，迷你的，顶部滑出的方式。
+	    	//WidgetMode.DELAY 		2 	int 	成就或排行widget弹出方式，延时的，由fireDelay方法触发。
+	    	var opts = {
+				method:'setWidgetMode',
+ 	 		   	params:{
+ 	 	 		   	mode: mode
+ 	 		   }
+ 	 		};
+	    	WYX.Connect.send(opts, function(data){
+		  		//callBack function
+		  		if (window.console && console.debug) {
+	    			console.debug('set WidgetMode.DELAY');
+		  		}
+			});
+		},
+
+		fireDelay: function() {
+			WYX.Connect.send({method:'fireDelay'}, function(data){
+			  	//callBack function
+				if (window.console && console.debug) {
+	    			console.debug('fireDelay done');
+		  		}
+			});
+		},
+
+		loadHtml: function(url, method, pardata, dataType, id) {//require jquery api support
+			if (!method) { //("POST"  or  "GET")
+				method = 'GET';
+			}
+			if (!dataType) {//xml
+				dataType = "text";
+			}
+			$.ajax({
+                type: method,
+                url: url,
+                data: pardata,
+                dataType: dataType,
+                success: function(resp){
+                	$("#" + id).html(resp);
+                }
+	 		});
+		}
+	}
+
+    WYX.Connect.init();
+    window.setTimeout(function() {
+    	WYX.Connect.init();
+    	//HFApp_sinawb.setMode(WidgetMode.DELAY);
+
+    }, 2000);
+
+    /* about gift page -E */
+
+
+    function initGameOther()
+    {
+
+    }
+
+	$(document).ready(function() {
+		if (typeof(IS_INDEX_PAGE) == "undefined") {
+			initGameOther();
+		}
+	});
+</script>
+
+<script type="text/javascript" charset="utf-8" src="http://fusion.qq.com/fusion_loader?appid={%$appId%}&platform={%$platform%}"></script>
+<script type="text/javascript">
+var HFApp = {
+	appId: '{%$smarty.const.APP_ID%}',
+
+	setHeight: function(height) {
+		if (isNaN(parseInt(height))) {
+			height = '1000';
+		}
+		fusion.canvas.setHeight(height);
+    },
+
+	qpointPay: function(id) {
+		$.ajax({
+            type: 'POST',
+            url: '/api/qpointpay',
+            data: {"cid": id},
+            dataType: "json",
+            timeout: 10000,
+            success: function(resp){
+            	if (resp.status==1) {
+                	//alert(resp.token);
+                	//alert(resp.url_params);
+                	fusion.dialog.buy({
+                	      appid : HFApp.appId,
+                	      sandbox: "1",
+                	      param : resp.url_params,
+                	      callback : HFApp.payDone
+                	   });
+            	}
+            	else {
+            		alert(resp.content);
+                }
+            },
+    		error: function(resp){
+    			ffdebug('err:'+resp);
+    		},
+    		complete: function(resp){
+    			//ffdebug('complete:'+resp);
+    		}
+ 		});
+	},
+
+	qpointBuy: function(urlParams) {
+		fusion2.dialog.buy({
+		    	      //appid : HFApp.appId,
+		    	      {% if $smarty.const.APP_SERVER_TYPE != 1 %}
+		    	      sandbox: true,
+		    	      {% /if %}
+		    	      param : urlParams,
+		    	    //  onSuccess : HFApp.payDone
+		    	  });
+	},
+
+	payDone:function(ret) {
+		//alert('pay done');
+		//alert(ret.ret);
+		callExternal1();
+	}
+};
+
+
+var _CHANELFOR_FLASH='';
+function goQpointPay(token, chanel) {
+	_CHANELFOR_FLASH = chanel;
+	HFApp.qpointBuy(token);
+	return;
+}
+
+function callExternal1() {
+	thisMovie("islandLoader").callbackQPointPay(_CHANELFOR_FLASH, 0);
+}
+
+</script>

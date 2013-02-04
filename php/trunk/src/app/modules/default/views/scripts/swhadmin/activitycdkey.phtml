@@ -1,0 +1,89 @@
+{%include file="hapyfishadmin/header.phtml"%}
+<style type="text/css">
+    <!--
+    table{font-size:14px;border-collapse: collapse;border-spacing: 0;empty-cells: show;}
+    th, td {border: 1px solid #B1CBE2;}
+    th{background-color: #D5E7F3;}
+    td{padding:2px;}
+    .odd{background-color: #EAF2F5;}
+    .total{font-weight:bold;}
+
+    -->
+</style>
+<h1>后台管理</h1>
+<ul id="nav">
+    <li><a href="{%$baseUrl%}/swhadmin">首页</a></li>
+    <li><a href="{%$baseUrl%}/swhadmin/timegift">时间礼包管理</a></li>
+    <li><a href="{%$baseUrl%}/swhadmin/levelgift">等级礼包管理</a></li>
+    <li><a href="{%$baseUrl%}/swhadmin/sevengift">七天礼包管理</a></li>
+    <li><a href="{%$baseUrl%}/swhadmin/package">礼包管理</a></li>
+    <li><a href="{%$baseUrl%}/swhadmin/daliytask">日常任务</a></li>
+    <li><a href="{%$baseUrl%}/swhadmin/guild">公会</a></li>
+    <li><a href="{%$baseUrl%}/swhadmin/activity">活动礼包</a></li>
+    <li><a href="{%$baseUrl%}/swhadmin/activitycdkey">活动cdkey生成</a></li>
+     <li><a href="{%$baseUrl%}/swhadmin/loadinggift">loading活动礼包</a></li>
+     <li><a href="{%$baseUrl%}/swhadmin/everysignnotice">每日趣闻</a></li>
+         <li><a href="{%$baseUrl%}/swhadmin/everysignlaba">每日签到 拉霸奖励</a></li>
+    <li><a href="{%$baseUrl%}/swhadmin/everysignfiveandseven">每日签到 5日7日奖励</a></li>
+    <li><a href="{%$baseUrl%}/swhadmin/dm">DM</a></li>
+    <li>当前登录者：{%$adminName%}</li>
+</ul>
+
+<div id="container">
+
+    <div id="divedit">
+        <table >
+            <tr>
+                <th>cdkey数量</th><th>对应活动奖励id</th><th align="center">玩家最多使用cdkey数量</th><th>操作</th>
+            </tr>
+            <tr>
+                <td><input id="actitivty_number" name="id" size=8 /></td>
+                <td>    
+                    <select name="actitivty_id_selected" id ="actitivty_id_selected"  style=" width: 100px;">
+                        {% foreach from=$list item=data %}
+                        <option value="{%$data.actitivty_list_id%}">{%$data.actitivty_list_id%}</option>
+                        {% /foreach  %}
+                    </select>
+                </td>
+                <td><input id="actitivty_times" name="actitivty_times" size=8  value="0" style=" width: 200px;"/></td>
+                <td><input type="button"  onclick="add();" value="添加"/>
+            </tr>
+        </table>
+        <div id="cdkey" style=" width: 290px; height: 200px; overflow: auto; display: none;">
+
+        </div>
+    </div>
+</div><!--/#container-->
+<script type="text/javascript">
+    function add() {
+        var number = $('#actitivty_number').val();
+        var id = $('#actitivty_id_selected').val();
+        var times = $('#actitivty_times').val();
+        $.ajax({
+            type: 'POST',
+            url: '/swhadmin/actitivtycdkeysadds',
+            data: {'id':id, 'number':number,'times':times},
+            dataType: 'text',
+            success: function(resp){
+                var obj = eval('(' + resp + ')');
+                if(obj['resp'] == 0){
+                    alert('生成成功');
+                    $('#cdkey').html(obj['cdkey']);
+                    $('#cdkey').css('display','block');
+                } else{
+                    alert(obj['resp']);
+                    return false;
+                }
+                //location.reload(true);  
+            },
+            error: function(resp){
+            },
+            complete: function(resp){
+            }
+        });
+		
+    }
+
+	
+</script>
+{%include file="hapyfishadmin/footer.phtml"%}

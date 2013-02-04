@@ -1,0 +1,198 @@
+{%include file="hapyfishadmin/header.phtml"%}
+	<h1>{%$appTitle%}后台管理</h1>
+	{%include file="hapyfishadmin/nav.phtml"%}
+
+	<div id="container" style="">
+		<strong>开发中...</strong>
+		<strong><div id="lblResult" style="color:red"></div></strong>
+
+		<div style="margin-top:10px;height:900px;background-color:#F9F5f8;">
+            <div style="float:left;width:150px;">
+    		工具一览：<br />
+    		<table width="100%">
+    			<tr><td>
+    				<a href="#" style="color:blue;" onclick="showDetail(2);">副本地图导入</a>
+    			</td></tr>
+    			<tr><td>
+    				<a href="#" style="color:blue;" onclick="showDetail(1);">合成物选择器</a>
+    			</td></tr>
+    		</table>
+            </div>
+
+            <div style="float:left;background-color:#EFFFFF;margin-left:20px;">
+            	<strong>视图</strong><br />
+            	<div id="divContent" style="width:1100px;height:880px;"></div>
+				<div id="divContent2" style="width:1100px;height:880px;display:none;">
+					副本编辑器数据导入：<br />
+					<form method="post" action="{%$baseUrl%}/hapyfishadmin/easytoolimport?tb=mapcopy" enctype="multipart/form-data" target="_blank">
+						<table>
+				  		<tr><td>怪（monsterList.csv）</td><td><input type="file" name="filename1"></td></tr>
+				  		<tr><td>矿（mineList.csv）</td><td><input type="file" name="filename2"></td></tr>
+				  		<tr><td>门（portalList.csv）</td><td><input type="file" name="filename3"></td></tr>
+				  		</table>
+				  		<input type="submit" name="btnImport" value="导入数据">
+				  	</form>
+
+					<br />副本地图静态信息导入（101.txt）：<br />
+					<form method="post" action="{%$baseUrl%}/hapyfishadmin/easytoolimport?tb=mapcopystatic" enctype="multipart/form-data" target="_blank">
+						<input type="file" name="filename">
+						<input type="submit" name="btnImport" value="地图信息导入">
+					</form>
+					<!-- <br/>清地图缓存工具-----选择地图：<select id="selMap"><option value="0">未选择</option></select>
+				  	<input type="button" id="btnCls" value="清缓存"> -->
+				</div>
+            </div>
+		</div>
+	</div><!--/#container-->
+
+<script type="text/javascript">
+    $(document).ready(function() {
+
+    });
+
+	function showDetail(type) {
+
+		//mapcopy
+		if (2 == type) {
+			$.ajax({
+	            type: 'POST',
+	            url: '/hapyfishadmin/getdata',
+	            data: {'table': 'alchemy_scene'},
+	            dataType: 'json',
+	            timeout: 10000,
+	            success: function(resp){
+	            	for (var i=0,c=resp.length; i<c; i++) {
+		            	var html = '<option value="' + resp[i].id + '">' + resp[i].name + '(' + resp[i].id + ')</option>';
+	            		$('#selMap').append(html);
+	            	}
+			    }
+			});
+			$("#btnCls").unbind('click');
+            $("#btnCls").click(function(){
+                var selId = $('#selMap').val();
+                if (selId != '0') {
+                	$.ajax({
+        	            type: 'POST',
+        	            url: '/zxtest/clearbasmapcopy',
+        	            data: {'ids': selId},
+        	            dataType: 'text',
+        	            timeout: 10000,
+        	            success: function(resp){
+        	            	$('#lblResult').html(resp).show();
+        			    }
+        			});
+                }
+            });
+
+			$('#divContent').hide();
+			$('#divContent2').show();
+		}
+
+		//mix
+		else if (1 == type) {
+			$.ajax({
+	            type: 'POST',
+	            url: '/hapyfishadmin/getdata',
+	            data: {'table': 'alchemy_stuff'},
+	            dataType: 'json',
+	            timeout: 10000,
+	            success: function(resp){
+	            	var aryHtml = ['选择材料：'];
+	            	aryHtml.push('<select id="selItem">');
+	            	aryHtml.push('<option value="0">未选择</option>');
+		            for (var i=0,c=resp.length; i<c; i++) {
+		            	aryHtml.push('<option value="', resp[i]['cid'], '">', resp[i]['name'], '(', resp[i]['cid'], ')', '</option>');
+		            }
+		            aryHtml.push('</select>');
+		            aryHtml.push('<input type="button" id="btnAdd" value=" 添加 " />');
+
+		            aryHtml.push('<br/>已选择材料列表：');
+		            aryHtml.push('<table id="tbList" width="100%">');
+		            aryHtml.push('<tr><th width="80px">');
+		            aryHtml.push('材料id');
+		            aryHtml.push('</th><th width="50px">');
+		            aryHtml.push('数量');
+		            aryHtml.push('</th><th>');
+		            aryHtml.push('操作');
+		            aryHtml.push('</th></tr>');
+		            aryHtml.push('</table>');
+		            aryHtml.push('<br/><div id="divrst" style="background-color:gainsboro;width:400px;height:120px"></div>');
+		            aryHtml.push('<br/><input type="button" disabled="disabled" id="btnGen" value=" 生成json " />');
+	            	$('#divContent').html(aryHtml.join('')).show();
+	            	$('#divContent2').hide();
+
+	            	$("#btnAdd").unbind('click');
+	                $("#btnAdd").click(doAdd);
+	                $("#btnGen").unbind('click');
+	                $("#btnGen").click(doGen);
+	            },
+	    		error: function(resp){
+	    			ffdebug('err:'+resp);
+	    		},
+	    		complete: function(resp){
+	    			//ffdebug('complete:'+resp);
+	    		}
+	 		});
+
+		}
+		return;
+	}
+
+	var _GlobeIdx = 0;
+	function doAdd() {
+		if ($("#selItem").val() != '0') {
+    		var aryHtml = ['<tr id="row', _GlobeIdx, '">'];
+    		aryHtml.push('<td>');
+    		aryHtml.push('<input type="text" name="txtId" value="', $("#selItem").val(), '" readOnly="true" size="20" />');
+    		aryHtml.push('</td>');
+    		aryHtml.push('<td>');
+    		aryHtml.push('<input type="text" name="txtNum" value="1" maxLength="5" size="10" />');
+    		aryHtml.push('</td>');
+    		aryHtml.push('<td>');
+    		aryHtml.push('<input type="button" value=" 删除 " onclick="doDel(', _GlobeIdx, ');" />');
+    		aryHtml.push('</td>');
+    		$("#tbList").append(aryHtml.join(''));
+    		_GlobeIdx++;
+
+    		$('#btnGen').attr('disabled', false);
+		}
+		return;
+	}
+
+	function doDel(idx) {
+		$("#row"+idx).remove();
+		return;
+	}
+
+	function doGen() {
+
+		var ids = [], nums = [];
+		$("input[name=txtId]").each(function(i){
+			ids.push(this.value);
+		});
+
+		$("input[name=txtNum]").each(function(i){
+			nums.push(this.value);
+		});
+		if (ids.length != nums.length) {
+			alert('Error,id and num not match');
+			return;
+		}
+		var ary = [];
+		for (var i=0,c=ids.length; i<c; i++) {
+			if (isNaN(nums[i])) {
+				alert('num must be numeral');
+				return;
+			}
+
+			ary.push('[' + ids[i] + ',' + nums[i] + ']');
+		}
+		var str = '[' + ary.join(',') + ']';
+		//alert(str);
+		$("#divrst").html(str);
+		return;
+	}
+
+
+</script>
+{%include file="hapyfishadmin/footer.phtml"%}

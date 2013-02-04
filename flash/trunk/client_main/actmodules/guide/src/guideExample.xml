@@ -1,0 +1,104 @@
+<list>
+	<guideExample id="ID" name="名字" hasMasker="Boolan">
+		<!-- 这一大步结束前的小步列表 -->
+		<prevStepList>
+			<stepStep>
+				<!-- 对话内容列表,可选 -->
+				<dialogList>
+					<dialog>
+						<!-- (必选) 头像的类名 -->
+						<avatarRef></avatarRef>
+						<!-- (必选) 说话时的状态标签 -->
+						<label></label>
+						<!-- (必选) 对话内容 -->
+						<chat></chat>
+						<!-- (可选) 头像的位置0:左,1:右 default:0 -->
+						<pos></pos>
+						<!-- (可选) 显示对话框时,立刻执行的脚步 -->
+						<promptlyHandler></promptlyHandler>
+						<!-- (可选) 点击后触发执行的脚本 -->
+						<clickHandler></clickHandler>
+					</dialog>
+				</dialogList>
+				<!-- (可选) 箭头一起的提示,通常不与对话共存 -->
+				<tip></tip>
+				<!-- 
+				(可选) 进入这一步(未测试状态)立刻执行的脚本 在prevList和nextList里都存在,
+				这个函数会在所有代码都执行完后再执行
+				-->
+				<promptlyHandler></promptlyHandler>
+				<!-- 
+				(可选) 点击后执行的脚本,仅当不会到达下一步并且被忽略时执行,
+				这个函数会在所有代码都执行完后再执行
+				-->
+				<clickHandler></clickHandler>
+				<!-- (可选) 箭头指向的目标对象,这里写function 字符串,然后用RuntimeUtil.getValueFun(str)获取函数 -->
+				<!-- 可以为显示对象或者坐标,如果为坐标,必须用x,y属性表示全局坐标 -->
+				<actTips></actTips>
+				<!-- (可选) 全局坐标偏移量,default:0 -->
+				<offsetX></offsetX>
+				<offsetY></offsetY>
+				<!-- (可选) 显示高亮的半径,如果<=0,则为actTips的内切圆半径,否则将使用该半径 -->
+				<radius></radius>
+				<!-- (可选,与actTips同存亡) 将要放入的容器,这里写function 字符串,然后用RuntimeUtil.getValueFun(str)获取函数 -->
+				<container></container>
+				<!-- (可选) 点击后可以到下一步的列表(显示对象或容器),与toNextDownList互斥,不能同时存在 -->
+				<toNextMouseList>
+					<mouseEvent>
+						<!--
+						(可选) 有效参数为[click|mouseDown] default:click
+						toNextClickList里尽量不要有不同的type存在
+						-->
+						<type></type>
+						<!-- (必选) 点击的目标或者目标的容器 -->
+						<target></target>
+						<!-- (可选) 点击后执行的代码,可以没有的 -->
+						<handler></handler>
+					</mouseEvent>
+				</toNextMouseList>
+				<!--
+				(可选)点击后被忽略的列表(显示对象或容器)
+				忽略所有点击:length()==0, 不忽略点击:target=null;
+				当任务引导时,如果length()==0时会自动添加target=null&type=click到忽略列表里,也就是说没有mouseDown时,length()==0表示不忽略点击,
+				但是如果toNextMouseList和ignoreMouseList都不存在,则即便是任务引导也会忽略所有点击
+				-->
+				<ignoreMouseList></ignoreMouseList>
+				<!-- (可选)用于提高性能,给addList,orList的临时变量列表(用属性表示), 属性名为变量名,属性值为要用RuntimeUtil解析的字符串表达式-->
+				<testVars name="value"></testVars>
+				<!-- (可选) default:true 与操作表达式列表,必须每个都为真才行 -->
+				<addList>
+					<!-- (必选) 一个表达式 返回结果为Boolean, 支持(),[](属性存取),::(获取引用),比较操作符(> < >= <= == !=) -->
+					<expr></expr>
+				</addList>
+				<!-- (可选) default:true 或操作表达式列表,只有一个为真就行,结构跟addList一样 -->
+				<orList></orList>
+			</stepStep>
+		</prevStepList>
+		<!-- (可选) 这一大步结束后的小步列表,结构跟prevStepList一样 -->
+		<nextStepList></nextStepList>
+		<!-- (必选) 大步结束的条件列表,任意一个为真就行 -->
+		<stepFinishList>
+			<!-- (必选) -->
+			<stepFinish>
+				<!-- (必选) 事件名 -->
+				<type>reciveComplete</type>
+				<!-- 
+				与操作表达式列表,必须每个都为真才行,
+				结构跟prevStepList的addList一样,
+				不同的是如果left不是函数,那么为event的属性
+				-->
+				<addList></addList>
+				<!-- 或操作表达式列表,只有一个为真就行,结构跟addList一样 -->
+				<orList></orList>
+			</stepFinish>
+		</stepFinishList>
+	</guideExample>
+	<!--
+	<stepBeforeDialogList>
+		<dialog>
+			<chat>GuideDialog_1_1</chat>
+			<clickHandler>help.model.command::StatisticClickCommand.firstClick()</clickHandler>
+		</dialog>
+	</stepBeforeDialogList>
+	-->
+</list>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>alchemyCoreLib</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>com.adobe.flexbuilder.project.flexbuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>com.adobe.flexbuilder.project.flexlibnature</nature>
+		<nature>com.adobe.flexbuilder.project.actionscriptnature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>[source path] happyfish-src</name>
+			<type>2</type>
+			<location>D:/work/alchemy-project/flash/trunk/client_main/happyfish/src</location>
+		</link>
+		<link>
+			<name>[source path] happymagic-src</name>
+			<type>2</type>
+			<location>D:/work/alchemy-project/flash/trunk/client_main/happymagic/src</location>
+		</link>
+		<link>
+			<name>[source path] libs</name>
+			<type>2</type>
+			<location>D:/work/alchemy-project/flash/trunk/client_main/libs</location>
+		</link>
+		<link>
+			<name>bin-debug</name>
+			<type>2</type>
+			<location>D:/work/alchemy-project/flash/trunk/client_main/moduleLibs</location>
+		</link>
+	</linkedResources>
+</projectDescription>

@@ -1,0 +1,64 @@
+package happymagic.display.view.dungeon 
+{
+	import flash.events.MouseEvent;
+	import happyfish.display.view.UISprite;
+	import happymagic.display.view.ui.ItemIconView;
+	import happymagic.manager.DataManager;
+	import happymagic.model.vo.ItemClassVo;
+	import happymagic.model.vo.MonsterVo;
+	/**
+	 * ...
+	 * @author XiaJunJie
+	 */
+	public class DungeonFeedView extends UISprite
+	{
+		private var feedId:int;
+		private var icon:ItemIconView;
+		private var _iview:ui_DungeonFeedUi; 
+		
+		public function DungeonFeedView()
+		{
+			super();
+			this._view = new ui_DungeonFeedUi;
+			this._iview = this._view as ui_DungeonFeedUi;
+		}
+		
+		public function setData(id:int,isItem:Boolean=true,feedId:int=0):void
+		{
+			this.feedId = feedId;
+			icon = new ItemIconView(_iview, 80, 80);
+			
+			if (isItem)
+			{
+				var itemClassVo:ItemClassVo = DataManager.getInstance().getItemClassByIid(id);
+				_iview.nameTxt.text = itemClassVo.name;
+				_iview.starBar.gotoAndStop(itemClassVo.level);
+				icon.setData(itemClassVo);
+			}
+			else
+			{
+				var monsterVo:MonsterVo = DataManager.getInstance().getMonsterClassVoByCid(id);
+				_iview.nameTxt.text = monsterVo.name;
+				_iview.starBar.visible = false;
+				icon.setClassName(monsterVo.className);
+			}
+			
+			_iview.fenxiang.addEventListener(MouseEvent.CLICK, onFeed);
+			_iview.closeBtn.addEventListener(MouseEvent.CLICK, onClose);
+		}
+		
+		private function onFeed(event:MouseEvent):void
+		{
+			
+		}
+		
+		private function onClose(event:MouseEvent):void
+		{
+			_iview.fenxiang.removeEventListener(MouseEvent.CLICK, onFeed);
+			_iview.closeBtn.removeEventListener(MouseEvent.CLICK, onClose);
+			
+			closeMe(true);
+		}
+	}
+
+}

@@ -1,0 +1,27 @@
+{
+    "result":{
+        "status":1
+    },
+    "rehandlingStateVo":[
+        {
+            "avatarId":801,
+            "lock":0
+        },
+        {
+            "avatarId":802,
+            "lock":0
+        },
+        {
+            "avatarId":803,
+            "lock":1
+        },
+        {
+            "avatarId":804,
+            "lock":1
+        },
+        {
+            "avatarId":801,
+            "lock":0
+        }
+    ]
+}

@@ -1,0 +1,9 @@
+id,cid,sceneId,name,className,faceClass,x,z,clickType,clickValue,faceX,faceZ,fiddleRangeX,fiddleRangeZ
+17,5,2,村民小女孩,npc.5.xiaonvhai,npc.5.xiaonvhai,14,3,,,0,0,5,5
+16,15,2,猫咪可乐,npc.15.cat,npc.15.cat,5,7,2,"{""actName"":""specialUpgrade"",""id"":""1269""}",0,0,0,0
+15,2,2,村民女,npc.2.cunmingnv,npc.2.cunmingnv,5,10,1,"{""name"":""happymagic.order.view::OrderDescriptionUISprite"",""sceneType"":[5]}",0,0,0,0
+13,4,2,村民壮男,npc.4.cunmingzhuangnan,npc.4.cunmingzhuangnan,11,6,2,"{""actName"":""specialUpgrade"",""id"":""979""}",0,0,0,0
+12,1,2,村民男,npc.1.cunmingnan,npc.1.cunmingnan,17,15,,,0,0,4,6
+11,6,2,士兵,npc.6.shibing,npc.6.shibing,0,1,,,0,0,0,0
+8,13,2,神父安德鲁,npc.13.andelu,npc.13.andelu,4,15,2,"{""actName"":""recoverHpMp""}",0,0,0,0
+5,3,2,村民老头,npc.3.cunminglaotou,npc.3.cunminglaotou,12,14,,,0,0,0,0

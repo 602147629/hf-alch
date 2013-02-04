@@ -1,0 +1,155 @@
+{%include file="hapyfishadmin/header.phtml"%}
+<style type="text/css">
+<!--
+table{font-size:14px;border-collapse: collapse;border-spacing: 0;empty-cells: show;}
+th, td {border: 1px solid #B1CBE2;}
+th{background-color: #D5E7F3;}
+td{padding:2px;}
+.odd{background-color: #EAF2F5;}
+.total{font-weight:bold;}
+
+-->
+</style>
+	<h1>后台管理</h1>
+	<ul id="nav">
+		<li><a href="{%$baseUrl%}/swhadmin">首页</a></li>
+		<li><a href="{%$baseUrl%}/swhadmin/timegift">时间礼包管理</a></li>
+		<li><a href="{%$baseUrl%}/swhadmin/levelgift">等级礼包管理</a></li>
+		<li><a href="{%$baseUrl%}/swhadmin/sevengift">七天礼包管理</a></li>
+		<li><a href="{%$baseUrl%}/swhadmin/package">礼包管理</a></li>
+		<li><a href="{%$baseUrl%}/swhadmin/daliytask">日常任务</a></li>
+		<li>当前登录者：{%$adminName%}</li>
+	</ul>
+
+	<div id="container">
+		<strong>战士礼包</strong>
+		注：礼包内容[661,3,1,4] 分别为cid type num 品质  type分类：1金币，2宝石，3装备道具，4佣兵。（只有装备有品质属性，其他没有为[121,3,1]）
+		<div id="divedit">
+		<table >
+		<tr>
+		<th>第几天</th><th>礼包内容</th><th>操做</th>
+		</tr>
+		<tr><td><input id="id_1" name="id" size=8 /></td>
+		<td><input id="list_1" name="list" size=38 /></td>
+		<td><input type="button"  onclick="add(1);" value="添加"/>
+		</tr>
+		</table>
+		<table >
+		<tr>
+			<th>第几天</th><th>礼包内容</th><th>操做</th>
+		</tr>
+		{% foreach from=$zhanshi item=data %}
+		<tr><td><input id="{%$data.day%}_id_1" value="{%$data.day%}" size=8 /></td>
+		<td><input id="{%$data.day%}_list_1" value="{%$data.awards%}" size=38 /></td>
+		<td><input type="button"  onclick="update({%$data.day%},1);" value="修改"/><input type="button" onclick="deletel({%$data.day%},1);" value="删除"/></td>
+		</tr>
+		{% /foreach  %}
+		</table>
+		<br />
+		<br />
+		<strong>弓手礼包</strong>
+		<table >
+		<tr>
+		<th>第几天</th><th>礼包内容</th><th>操做</th>
+		</tr>
+		<tr><td><input id="id_2" name="id" size=8 /></td>
+		<td><input id="list_2" name="list" size=38 /></td>
+		<td><input type="button"  onclick="add(2);" value="添加"/>
+		</tr>
+		</table>
+		<table >
+		<tr>
+			<th>第几天</th><th>礼包内容</th><th>操做</th>
+		</tr>
+		{% foreach from=$gongshou item=data %}
+		<tr><td><input id="{%$data.day%}_id_2" value="{%$data.day%}" size=8 /></td>
+		<td><input id="{%$data.day%}_list_2" value="{%$data.awards%}" size=38 /></td>
+		<td><input type="button"  onclick="update({%$data.day%},2);" value="修改"/><input type="button" onclick="deletel({%$data.day%},2);" value="删除"/></td>
+		</tr>
+		{% /foreach  %}
+		</table>
+		<br />
+		<br />
+		<br />
+		<br />
+		<strong>法师礼包</strong>
+		<table >
+		<tr>
+		<th>第几天</th><th>礼包内容</th><th>操做</th>
+		</tr>
+		<tr><td><input id="id_3" name="id" size=8 /></td>
+		<td><input id="list_3" name="list" size=38 /></td>
+		<td><input type="button"  onclick="add(3);" value="添加"/>
+		</tr>
+		</table>
+		<table >
+		<tr>
+			<th>第几天</th><th>礼包内容</th><th>操做</th>
+		</tr>
+		{% foreach from=$fashi item=data %}
+		<tr><td><input id="{%$data.day%}_id_3" value="{%$data.day%}" size=8 /></td>
+		<td><input id="{%$data.day%}_list_3" value="{%$data.awards%}" size=38 /></td>
+		<td><input type="button"  onclick="update({%$data.day%},3);" value="修改"/><input type="button" onclick="deletel({%$data.day%},3);" value="删除"/></td>
+		</tr>
+		{% /foreach  %}
+		</table>
+		</div>
+	</div><!--/#container-->
+	<script type="text/javascript">
+	function add(type) {
+		var id = $("#id_"+type).val();
+		var list = $("#list_"+type).val();
+		$.ajax({
+            type: 'POST',
+            url: '/swhadmin/adds',
+            data: {'type': type,'id':id, 'list':list},
+            dataType: 'text',
+            success: function(resp){
+            	location.reload(true);  
+            },
+    		error: function(resp){
+    		},
+    		complete: function(resp){
+    		}
+ 		});
+		
+	}
+
+	function update(id,type) {
+		var id = $("#"+id+"_id_"+type).val();
+		var list = $("#"+id+"_list_"+type).val();
+		$.ajax({
+            type: 'POST',
+            url: '/swhadmin/adds',
+           	data: {'type': type,'id':id, 'list':list},
+            dataType: 'text',
+            success: function(resp){
+            	location.reload(true);  
+            },
+    		error: function(resp){
+    		},
+    		complete: function(resp){
+    		}
+ 		});
+		
+	}
+
+	function deletel(id,type) {
+		$.ajax({
+            type: 'POST',
+            url: '/swhadmin/deletes',
+            data: {'type': type,'id':id},
+            dataType: 'text',
+            success: function(resp){
+            	location.reload(true);  
+            },
+    		error: function(resp){
+    		},
+    		complete: function(resp){
+    		}
+ 		});
+		
+	}
+	
+	</script>
+{%include file="hapyfishadmin/footer.phtml"%}

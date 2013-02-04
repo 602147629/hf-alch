@@ -1,0 +1,1 @@
+{"students":[{"sid":"2","decor_id":"2","state":1,"time":0,"magic_id":1001,"event_time":-1,"coin":0,"stone_time":0,"can_steal":0}]}

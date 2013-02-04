@@ -1,0 +1,50 @@
+<div class="main">
+	<div style="height:850px;width:791px;background-color:#fcdf95;padding:10px;border-left:2px solid #5e3929;border-right:2px solid #5e3929;border-bottom:2px solid #5e3929;">
+		<div style="height:850px;background-color:#FFEBCD;">
+		<div style="margin-left:7%;"><a href="{%$hostUrl%}/vip" target="_blank"><img src="{%$staticUrl%}/alchemy/image/pay/vip.gif" /></a></div>
+	<ul>
+	<li style="margin-left:75px; font-size:14px;padding-top:5px;">
+		首次充值100宝石，可获入门礼包，含金币5000，HP急救箱2个 
+	</li>
+	<li style="margin-left:75px; font-size:14px;padding-top:5px;">
+		首次充值500宝石，可获进阶礼包，含金币7000，HP急救箱5个，LV16项链翡翠之心
+		</li>
+	<li style="margin-left:75px; font-size:14px;padding-top:5px;">
+		首次充值1000宝石，可获高手礼包，含金币10000，HP急救箱10个，LV26钻石之心，传奇精灵弓手“琳”
+	</li>
+	<li style="margin-left:75px; font-size:14px;padding-top:5px;">
+		首次充值5000宝石，可获大神礼包，含金币20000，HP急救箱15个，LV31辉煌之心，传奇人类战士“铁锤十四世”
+	</li>
+	</ul>
+	{% foreach from=$section key=k item=v %}
+	{% if $v.open == 1 %}
+				<div class="chongzhi">
+					<div class="chongzhi-bg">
+					<div class="chongzhi-ed"><img src="{%$staticUrl%}/alchemy/image/pay/{%$v.gold.img%}" title="{%$v.gold.title%}" /></div>
+	{% foreach from=$v.include item=v2 %}
+	{% if $v2.cid>0 && $v2.num>0 %}
+						<div class="chongzhi-item">
+	{% if $v2.limit == 1 %}
+	                    	<div class="xian"><img src="{%$staticUrl%}/alchemy/image/pay/timelimit.gif" /></div>
+	{% /if %}
+							<img src="{%$staticUrl%}/alchemy/image/pay/include/item/{%$v2.cid%}.png" />
+							<span class="chongzhi-item-text">{%$v2.num%}</span>
+						</div>
+	{% /if %}
+	{% /foreach %}
+					</div>
+					<div class="chongzhi-bt"><img class="diamond" src="{%$staticUrl%}/alchemy/image/pay/{%$v.btn.img%}" onclick="payOrder({%$v.id%});return false;" /></div>
+				</div>
+	{% /if %}
+	{% /foreach %}
+			<div class="clear"></div>
+		    <div class="xianshi" style="width:720px;height:20px;clear:both;margin-left:40px;padding-top:15px;">
+		    	{%$note%}
+		    </div>
+			<div style="color:grey;padding:20px 10px 20px 40px;">
+				友情小提示：成功充值后宝石即刻到账，部分用户可能因为网络原因，宝石约10分钟左右到帐！<br/>
+				客服提示：如果有支付相关的疑问，请QQ联系游戏客服QQ：2414377107
+			</div>
+		</div>
+	</div>
+</div>

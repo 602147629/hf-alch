@@ -1,0 +1,122 @@
+{%include file="hapyfishadmin/header.phtml"%}
+<style type="text/css">
+    <!--
+    table{font-size:14px;border-collapse: collapse;border-spacing: 0;empty-cells: show;}
+    th, td {border: 1px solid #B1CBE2;}
+    th{background-color: #D5E7F3;}
+    td{padding:2px;}
+    .odd{background-color: #EAF2F5;}
+    .total{font-weight:bold;}
+
+    -->
+</style>
+<h1>后台管理</h1>
+<ul id="nav">
+    <li><a href="{%$baseUrl%}/swhadmin">首页</a></li>
+    <li><a href="{%$baseUrl%}/swhadmin/timegift">时间礼包管理</a></li>
+    <li><a href="{%$baseUrl%}/swhadmin/levelgift">等级礼包管理</a></li>
+    <li><a href="{%$baseUrl%}/swhadmin/sevengift">七天礼包管理</a></li>
+    <li><a href="{%$baseUrl%}/swhadmin/package">礼包管理</a></li>
+    <li><a href="{%$baseUrl%}/swhadmin/daliytask">日常任务</a></li>
+    <li><a href="{%$baseUrl%}/swhadmin/guild">公会</a></li>
+    <li><a href="{%$baseUrl%}/swhadmin/activity">活动礼包</a></li>
+    <li><a href="{%$baseUrl%}/swhadmin/activitycdkey">活动cdkey生成</a></li>
+     <li><a href="{%$baseUrl%}/swhadmin/loadinggift">loading活动礼包</a></li>
+     <li><a href="{%$baseUrl%}/swhadmin/everysignnotice">每日趣闻</a></li>
+         <li><a href="{%$baseUrl%}/swhadmin/everysignlaba">每日签到 拉霸奖励</a></li>
+    <li><a href="{%$baseUrl%}/swhadmin/everysignfiveandseven">每日签到 5日7日奖励</a></li>
+    <li>当前登录者：{%$adminName%}</li>
+</ul>
+
+<div id="container">
+    <strong>活动礼包</strong>
+    注：活动礼包内容[661,3,1,4] 分别为cid type num 品质  type分类：1金币，2宝石，3装备道具，4佣兵。（只有装备有品质属性，其他没有为[121,3,1]）
+    <div id="divedit">
+        <table >
+            <tr>
+                <th>活动奖励内容</th><th>操作</th>
+            </tr>
+            <tr>
+<!--                <td><input id="actitivty_0_id" name="id" size=8 /></td>-->
+                <td><input id="actitivty_0_list" name="list" size=38 /></td>
+                <td><input type="button"  onclick="add(0);" value="添加"/>
+            </tr>
+        </table>
+        <table >
+            <tr>
+              <th>活动奖励id</th> <th>活动奖励内容</th><th>操作</th>
+            </tr>
+            {% foreach from=$list item=data %}
+            <tr>
+                <td>{%$data.actitivty_list_id%}</td>
+                <td><input id="actitivty_{%$data.actitivty_list_id%}_list" value="{%$data.actitivty_list_award%}" size=38 /></td>
+                <td><input type="button"  onclick="update({%$data.actitivty_list_id%});" value="修改"/><input type="button" onclick="deletel({%$data.actitivty_list_id%},1);" value="删除"/></td>
+            </tr>
+            {% /foreach  %}
+        </table>
+    </div>
+</div><!--/#container-->
+<script type="text/javascript">
+    function add(type) {
+        if(type !=0){
+            var id = $("#actitivty_"+type+'_id').val();
+        } else{
+            var id = 0;
+        }
+        var list = $("#actitivty_"+type+'_list').val();
+        $.ajax({
+            type: 'POST',
+            url: '/swhadmin/actitivtyadds',
+            data: {'id':id, 'list':list, 'type':0},
+            dataType: 'text',
+            success: function(resp){
+                location.reload(true);  
+            },
+            error: function(resp){
+            },
+            complete: function(resp){
+            }
+        });
+        
+		
+    }
+
+    function update(id) {
+        var list = $("#actitivty_"+id+'_list').val();
+        $.ajax({
+            type: 'POST',
+            url: '/swhadmin/actitivtyadds',
+            data: {'id':id, 'list':list, 'type':1},
+            dataType: 'text',
+            success: function(resp){
+               
+                location.reload(true);  
+            },
+            error: function(resp){
+            },
+            complete: function(resp){
+            }
+        });
+		
+    }
+
+    function deletel(id) {
+        $.ajax({
+            type: 'POST',
+            url: '/swhadmin/actitivtydeletes',
+            data: {'id':id},
+            dataType: 'text',
+            success: function(resp){
+             
+               location.reload(true);  
+            },
+            error: function(resp){
+            },
+            complete: function(resp){
+            }
+        });
+		
+    }
+	
+</script>
+{%include file="hapyfishadmin/footer.phtml"%}

@@ -1,0 +1,149 @@
+body {
+	margin:0;
+	font-family: 宋体,Arial;
+	font-size: 12px;
+	list-style-type: none;
+}
+ul{ border:0px; margin:0px; padding:0px;}
+li{
+	border:0px;
+	margin:0px;
+	padding:0px;
+	list-style-position: inside;
+	list-style-image: none;
+	list-style-type: none;
+}
+
+a {
+	color: #0C67B6;
+	text-decoration: none;
+}
+
+clear{
+	border:0px;
+	margin:0px;
+	padding:0px;
+	line-height:0px;
+	height:0px;
+	clear:both;
+	}
+	
+.nav_01{
+	height:25px;
+	width:124px;
+	background-image:url(image/consumelogs/table02.gif);
+	display:block;
+	font-size:14px;
+}
+.nav_02{
+	height:25px;
+	width:124px;
+	background-image:url(image/consumelogs/table01.gif);
+	display: block;
+	cursor :pointer;
+	font-size: 14px;
+}
+
+.chongzhicontent{
+	height: 70px;
+	width: 815px;
+	color: #3c8db0;
+	padding-top:20px;
+}
+.chongzhicontent img{
+	margin-left:20px;
+	float: left;
+}
+.xinxi{	
+	height: 60px;
+	width: 250px;
+	float: left;
+	padding:5px 0 0 10px;
+}
+.cname{
+	height: 20px;
+	width: 80px;
+}
+.shuzi{
+	height: 20px;
+	width: 90px;
+	background-image: url(image/pay/baoshi.gif);
+	background-repeat: no-repeat;
+	color: #5e5e5e;
+	text-align: right;
+	padding: 10px 10px 0;
+	float: left;
+}
+.fhyx img{ margin-left:240px}
+.chongzhi{
+	height: 230px;
+	width: 225px;
+	float: left;
+	padding: 40px 50px 10px 75px;
+}
+.chongzhi-ed{
+	height: 81px;
+	width: 225px;
+	padding:28px 0 0 22px;
+}
+.chongzhi-bg{
+	height: 197px;
+	width: 298px;
+	background-image: url(image/pay/include/bg.png);
+	background-repeat: no-repeat;
+	padding:2px 0px 0px 10px;
+}
+.chongzhi-item{
+	height: 56px;
+	width: 56px;
+	list-style-image: none;
+	list-style-type: none;
+	float:left;
+	background-image:url(image/pay/include/box.png);
+	left:20px;
+	top:15px;
+	margin-right:5px;
+	position: relative;
+}
+.chongzhi-item-text{
+	position:relative;
+	float:right;
+	right:8px;
+	bottom:22px;
+	font-size:12px;
+	font-weight:bold;
+	color:#324952;
+}
+.chongzhi-bt{
+	clear: both;
+	height: 40px;
+	text-align: center;
+	width: 298px;
+	padding: 10px 0 0 0;
+}
+.chongzhi .diamond{
+	cursor:pointer;
+}
+.table{
+	height:25px;
+	width:815px;
+	background-image:url(image/pay/table-bg.gif);
+	background-repeat: repeat;
+	text-align: center;
+	margin:0;
+}
+.table li{ float:left; line-height:25px}
+
+.pay-count{
+	color: #FF0000;
+}
+.table-line{
+	background-image: url(image/pay/line.gif);
+	background-repeat: repeat-x;
+	text-align:left;
+}
+.xian{
+	left: 36px;
+	position: absolute;
+	top: 58px;
+}

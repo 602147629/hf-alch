@@ -1,0 +1,148 @@
+<script type="text/javascript" charset="utf-8" src="http://fusion.qq.com/fusion_loader?appid={%$appId%}&platform={%$platform%}"></script>
+<script type="text/javascript">
+var HFApp_QQ = {
+		appId: "{%$appId%}",
+		appHost: "{%$hostUrl%}",
+	    
+	    resize: function(h) {
+			if (isNaN(parseInt(h))) {
+				h = 1000;
+			}
+			var opt = {height:h};
+			fusion2.canvas.setHeight(opt);
+		},
+
+	    invite: function() {
+			fusion2.dialog.invite({
+				onClose: function(opt){
+					hideInvite();
+//					alert('invite hide');
+				}
+			});
+	    },
+
+		loadHtml: function(url, method, pardata, dataType, id) {//require jquery api support
+			if (!method) { //("POST"  or  "GET")
+				method = 'GET';
+			}
+			if (!dataType) {//xml
+				dataType = "text";
+			}
+			$.ajax({
+                type: method,
+                url: url,
+                data: pardata,
+                dataType: dataType,
+                success: function(resp){
+                	$("#" + id).html(resp);
+                }
+	 		});
+		},
+
+		qpointPay: function(id) {
+			$.ajax({
+	            type: 'POST',
+	            url: '/api/qpointpay',
+	            data: {"cid": id},
+	            dataType: "json",
+	            timeout: 10000,
+	            success: function(resp){
+	            	if (resp.status==1) {
+	                	//alert(resp.token);
+	                	//alert(resp.url_params);
+	                	fusion.dialog.buy({
+	                	      appid : HFApp.appId,
+	                	      sandbox: true,
+	                	      param : resp.url_params,
+	                	      callback : HFApp.payDone
+	                	   });
+	            	}
+	            	else {
+	            		alert(resp.content);
+	                }
+	            },
+	    		error: function(resp){
+	    			ffdebug('err:'+resp);
+	    		},
+	    		complete: function(resp){
+	    			//ffdebug('complete:'+resp);
+	    		}
+	 		});
+		},
+
+		qpointBuy: function(urlParams,token) {
+			fusion2.dialog.buy({
+			    	      sandbox: false,
+			    	      param : urlParams,
+			    	      context : token,
+			    	      onSuccess : HFApp_QQ.payDone,
+			    	      onCancel : HFApp_QQ.payCancel
+			    	  });
+		},
+
+		payDone:function(ret) {
+			var pardata = {token:ret.context};
+			$.ajax({
+                type: 'POST',
+                url: '/pay/shipped',
+                data: pardata,
+                dataType: 'text',
+                success: function(resp){
+					callExternal1(resp);
+                }
+	 		});
+			
+		},
+
+		payCancel:function(ret) {
+			var pardata = {token:ret.context};
+			$.ajax({
+                type: 'POST',
+                url: '/pay/cancel',
+                data: pardata,
+                dataType: 'text',
+                success: function(resp){
+					callExternal1(resp);
+                }
+	 		});
+			
+		},
+
+		qpointRecharge: function() {
+			fusion2.dialog.recharge({
+						onClose : function () {}
+			    	  });
+		},
+
+		qpointCheckBalance: function() {
+			fusion2.dialog.checkBalance({
+						onClose : function () {}
+			    	  });
+		}
+		
+		
+	}
+
+    function initGameOther()
+    {
+
+    }
+
+	$(document).ready(function() {
+		if (typeof(IS_INDEX_PAGE) == "undefined") {
+			initGameOther();
+		}
+	});
+
+	var _CHANELFOR_FLASH='';
+	function goQpointPay(token, chanel) {
+		_CHANELFOR_FLASH = chanel;
+		HFApp.qpointBuy(token);
+		return;
+	}
+
+	function callExternal1(data) {
+		var opt = $.parseJSON(data);
+		thisMovie("gameContainer").snsPayCallBack(data,opt.token);
+	}
+</script>

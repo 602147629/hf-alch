@@ -1,0 +1,1 @@
+[[{"type":"roundRoom"},{"type":"outScene"},{"type":"hide","showTime":10000}],[{"type":"toNode"},{"type":"showMood","iconClass":"pao_flash","showTime":3000}],[{"type":"requestMeet","num":2},{"type":"showMood","iconClass":"pao_chat","showTime":10000},{"type":"showMood","iconClass":"pao_heart","showTime":1000}]]

@@ -1,0 +1,105 @@
+{
+"sceneClass":{
+		"sceneId":"101",
+		"type":"2",
+		"name":"\u5e7d\u7075\u77ff\u6d1e\u4e00\u5c42",
+		"content":"",
+		"needLevel":"5",
+		"className":"",
+		"bg":"",
+		"bgSound":"0",
+		"nodeStr":"eNpjOG6oA4MGMJY1aWIGYIguRrw6QzLFUCAA610laQ==",
+		"numCols":"10",
+		"numRows":"10",
+		"isoStartX":"0",
+		"isoStartZ":"0",
+		"parentSceneId":"31",
+		"entrances":"[[2,0]]",
+		"floorList":[
+			[151,151,151,151,151,151,151,151],
+			[151,151,151,151,151,151,151,151],
+			[151,151,151,151,151,151,151,151],
+			[151,151,151,151,151,151,151,151],
+			[151,151,151,151,151,151,151,151],
+			[151,151,151,151,151,151,151,151],
+			[151,151,151,151,151,151,151,151],
+			[151,151,151,151,151,151,151,151]
+		],
+		"portalList":[
+			{
+				"cid":197053,
+				"id":1,
+				"x":0,
+				"z":0,
+				"targetSceneId":1,
+				"mirror":0
+			}
+		],
+		"monsterList":[
+			{
+				"cid":7050,
+				"id":2,
+				"x":8,
+				"z":8,
+				"fiddleRangeX":2,
+				"fiddleRangeZ":2
+			}
+		],
+		"mineList":[
+			{
+				"cid":7051,
+				"id":3,
+				"x":0,
+				"z":2
+			}
+		]
+},
+"monsterClass":[
+	{
+		"cid":"7050",
+		"name":"¹Ö1",
+		"className":"dungeon.1.bear",
+		"maxHp":"2",
+		"sizeX":"1",
+		"sizeZ":"1",
+		"collisionRange":5,
+		"conditions":[]
+	}
+],
+"mineClass":[
+	{
+		"cid":"7051",
+		"name":"¿ó1",
+		"className":"dungeon.1.greenboli",
+		"maxHp":"5",
+		"sizeX":"1",
+		"sizeZ":"1",
+		"conditions":[{"type":"2","id":"sp","num":"1"}]
+	}
+],
+"itemClass":[
+	{
+            "cid":"197053",
+            "sizeX":"1",
+            "sizeZ":"1",
+            "name":"ÓÄÁé¿ó¶´´«ËÍÃÅ",
+            "content":"ÓÄÁé¿ó¶´´«ËÍÃÅ",
+            "className":"dungeon.1.portal1",
+            "isNew":"0"
+        },
+	{
+            "cid":"151",
+            "sizeX":"1",
+            "sizeZ":"1",
+            "name":"Ä¾Í·µØ°å",
+            "content":"×°ÐÞÎï1",
+            "className":"floor.1.baiseshizilu",
+            "isNew":"0",
+            "canBuy":"0",
+            "coin":"0",
+            "gem":"0",
+            "sale":"1",
+            "worth":"5"
+        }
+]
+}

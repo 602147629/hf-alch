@@ -1,0 +1,201 @@
+{%include file="hapyfishadmin/header.phtml"%}
+<style type="text/css">
+<!--
+table{font-size:14px;border-collapse: collapse;border-spacing: 0;empty-cells: show;}
+th, td {border: 1px solid #B1CBE2;}
+th{background-color: #D5E7F3;}
+td{padding:2px;}
+.odd{background-color: #EAF2F5;}
+.total{font-weight:bold;}
+
+-->
+</style>
+	<h1>后台管理</h1>
+	<ul id="nav">
+		<li><a href="{%$baseUrl%}/swhadmin">首页</a></li>
+		<li><a href="{%$baseUrl%}/swhadmin/timegift">时间礼包管理</a></li>
+		<li><a href="{%$baseUrl%}/swhadmin/levelgift">等级礼包管理</a></li>
+		<li><a href="{%$baseUrl%}/swhadmin/sevengift">七天礼包管理</a></li>
+		<li><a href="{%$baseUrl%}/swhadmin/package">礼包管理</a></li>
+		<li><a href="{%$baseUrl%}/swhadmin/daliytask">日常任务</a></li>
+		<li>当前登录者：{%$adminName%}</li>
+	</ul>
+
+	<div id="container">
+		<strong>任务活跃度设置</strong>
+		<div id="divedit">
+		<table >
+		<tr>
+		<th>任务id</th><th>活跃度</th><th>操做</th>
+		</tr>
+		<tr><td><input id="tid" name="tid" size=8 /></td>
+		<td><input id="activity" name="activity" size=8 /></td>
+		<td><input type="button"  onclick="add();" value="添加"/>
+		</tr>
+		</table>
+		<table >
+		<tr>
+			<th>任务id</th><th>活跃度</th><th>操做</th>
+		</tr>
+		{% foreach from=$list item=data %}
+		<tr><td><input id="{%$data.tid%}_id" value="{%$data.tid%}" size=8 /></td>
+		<td><input id="{%$data.tid%}_activity" value="{%$data.activity%}" size=8 /></td>
+		<td><input type="button"  onclick="update({%$data.tid%});" value="修改"/><input type="button" onclick="deleted({%$data.tid%});" value="删除"/></td>
+		</tr>
+		{% /foreach  %}
+		</table>
+		<br />
+		<br />
+		<strong>活跃度阶段设置</strong>
+		<table >
+		<tr>
+		<th>活跃度</th><th>奖励</th><th>操做</th>
+		</tr>
+		<tr><td><input id="ac" name="ac" size=8 /></td>
+		<td><input id="awards" name="awards" size=38 /></td>
+		<td><input type="button"  onclick="adda();" value="添加"/>
+		</tr>
+		</table>
+		<table >
+		<tr>
+			<th>活跃度</th><th>奖励</th><th>操做</th>
+		</tr>
+		{% foreach from=$aclist item=data %}
+		<tr><td><input id="{%$data.id%}_ac" value="{%$data.activity%}" size=8 /></td>
+		<td><input id="{%$data.id%}_awards" value="{%$data.awards%}" size=38 /></td>
+		<td><input type="button"  onclick="updatea({%$data.id%});" value="修改"/><input type="button" onclick="deletea({%$data.id%});" value="删除"/></td>
+		</tr>
+		{% /foreach  %}
+		</table>
+		</div>
+		<input type="button"  onclick="updatetocache();" value="更新" style="margin-left:200px;" />
+	</div><!--/#container-->
+	<script type="text/javascript">
+	function add() {
+		var tid = $("#tid").val();
+		var ac = $("#activity").val();
+		$.ajax({
+            type: 'POST',
+            url: '/swhadmin/addd',
+            data: {'tid':tid,'activity':ac},
+            dataType: 'text',
+            success: function(resp){
+            	location.reload(true);  
+            },
+    		error: function(resp){
+    		},
+    		complete: function(resp){
+    		}
+ 		});
+		
+	}
+
+	function update(id) {
+		var id = $("#"+id+"_id").val();
+		var ac = $("#"+id+"_activity").val();
+		$.ajax({
+            type: 'POST',
+            url: '/swhadmin/addd',
+            data: {'tid':id,'activity':ac},
+            dataType: 'text',
+            success: function(resp){
+            	location.reload(true);  
+            },
+    		error: function(resp){
+    		},
+    		complete: function(resp){
+    		}
+ 		});
+		
+	}
+
+	function deleted(id) {
+		$.ajax({
+            type: 'POST',
+            url: '/swhadmin/deleted',
+            data: {'tid':id},
+            dataType: 'text',
+            success: function(resp){
+            	location.reload(true);  
+            },
+    		error: function(resp){
+    		},
+    		complete: function(resp){
+    		}
+ 		});
+		
+	}
+
+	function deletea(id) {
+		$.ajax({
+            type: 'POST',
+            url: '/swhadmin/deletea',
+            data: {'id':id},
+            dataType: 'text',
+            success: function(resp){
+            	location.reload(true);  
+            },
+    		error: function(resp){
+    		},
+    		complete: function(resp){
+    		}
+ 		});
+		
+	}
+
+	function adda() {
+		var ac = $("#ac").val();
+		var awards = $("#awards").val();
+		$.ajax({
+            type: 'POST',
+            url: '/swhadmin/adda',
+            data: {'ac':ac,'awards':awards},
+            dataType: 'text',
+            success: function(resp){
+            	location.reload(true);  
+            },
+    		error: function(resp){
+    		},
+    		complete: function(resp){
+    		}
+ 		});
+		
+	}
+
+	function updatea(id) {
+		var ac = $("#"+id+"_ac").val();
+		var awards = $("#"+id+"_awards").val();
+		$.ajax({
+            type: 'POST',
+            url: '/swhadmin/updatea',
+            data: {'id':id,'activity':ac,'awards':awards},
+            dataType: 'text',
+            success: function(resp){
+            	location.reload(true);  
+            },
+    		error: function(resp){
+    		},
+    		complete: function(resp){
+    		}
+ 		});
+		
+	}
+
+	function updatetocache()
+	{
+		$.ajax({
+            type: 'POST',
+            url: '/swhadmin/updatetocache',
+            data: {'type':'activity'},
+            dataType: 'text',
+            success: function(resp){
+            	location.reload(true);  
+            },
+    		error: function(resp){
+    		},
+    		complete: function(resp){
+    		}
+ 		});
+	}
+	</script>
+{%include file="hapyfishadmin/footer.phtml"%}

@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<project version="2">
+  <!-- Output SWF options -->
+  <output>
+    <movie outputType="Application" />
+    <movie input="" />
+    <movie path="bin\mapEditerAir.swf" />
+    <movie fps="30" />
+    <movie width="800" />
+    <movie height="600" />
+    <movie version="2" />
+    <movie minorVersion="7" />
+    <movie platform="AIR" />
+    <movie background="#FFFFFF" />
+    <movie preferredSDK="Flex 3.6, AIR 1.5.3;3.6.0, 1.5.3;" />
+  </output>
+  <!-- Other classes to be compiled into your SWF -->
+  <classpaths>
+    <class path="src" />
+    <class path="..\happyfish\src" />
+    <class path="..\libs" />
+    <class path="..\moduleLibs" />
+    <class path="..\happymagic\src" />
+  </classpaths>
+  <!-- Build options -->
+  <build>
+    <option accessible="False" />
+    <option allowSourcePathOverlap="False" />
+    <option benchmark="False" />
+    <option es="False" />
+    <option locale="" />
+    <option loadConfig="" />
+    <option optimize="True" />
+    <option omitTraces="True" />
+    <option showActionScriptWarnings="True" />
+    <option showBindingWarnings="True" />
+    <option showInvalidCSS="True" />
+    <option showDeprecationWarnings="True" />
+    <option showUnusedTypeSelectorWarnings="True" />
+    <option strict="True" />
+    <option useNetwork="True" />
+    <option useResourceBundleMetadata="True" />
+    <option warnings="True" />
+    <option verboseStackTraces="False" />
+    <option linkReport="" />
+    <option loadExterns="" />
+    <option staticLinkRSL="True" />
+    <option additional="" />
+    <option compilerConstants="" />
+    <option minorVersion="" />
+  </build>
+  <!-- SWC Include Libraries -->
+  <includeLibraries>
+    <element path="lib\ui.swc" />
+  </includeLibraries>
+  <!-- SWC Libraries -->
+  <libraryPaths>
+    <element path="..\..\client_mix\moduleLibs\coreLib.swc" />
+    <element path="lib\as3xls-1.0.swc" />
+  </libraryPaths>
+  <!-- External Libraries -->
+  <externalLibraryPaths>
+    <!-- example: <element path="..." /> -->
+  </externalLibraryPaths>
+  <!-- Runtime Shared Libraries -->
+  <rslPaths>
+    <!-- example: <element path="..." /> -->
+  </rslPaths>
+  <!-- Intrinsic Libraries -->
+  <intrinsics>
+    <!-- example: <element path="..." /> -->
+  </intrinsics>
+  <!-- Assets to embed into the output SWF -->
+  <library>
+    <!-- example: <asset path="..." id="..." update="..." glyphs="..." mode="..." place="..." sharepoint="..." /> -->
+  </library>
+  <!-- Class files to compile (other referenced classes will automatically be included) -->
+  <compileTargets>
+    <compile path="src\happyfish\editer\view\Main.as" />
+  </compileTargets>
+  <!-- Paths to exclude from the Project Explorer tree -->
+  <hiddenPaths>
+    <!-- example: <hidden path="..." /> -->
+  </hiddenPaths>
+  <!-- Executed before build -->
+  <preBuildCommand>taskkill /f /fi "IMAGENAME eq adl.exe"</preBuildCommand>
+  <!-- Executed after build -->
+  <postBuildCommand alwaysRun="False" />
+  <!-- Other project options -->
+  <options>
+    <option showHiddenPaths="False" />
+    <option testMovie="Custom" />
+    <option testMovieCommand="run.bat" />
+  </options>
+  <!-- Plugin storage -->
+  <storage />
+</project>

@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="{%$staticUrl%}/alchemy/feed.css?v=1.03" rel="stylesheet" type="text/css" />
+<title>炼金客服</title>
+<style type="text/css">
+body{font:12px/1.5 Arial, Helvetica, sans-serif; background:#ffffff; color:#666;}
+body,ul,li{margin:0; padding:0;}
+a{text-decoration:none; color:#666666;}
+img{border:none;}
+img,input{vertical-align:middle;}
+
+ul li{list-style:none;}
+</style>
+</head>
+<body>
+<!-- ClickTale Top part -->
+<script type="text/javascript">
+var WRInitTime=(new Date()).getTime();
+
+</script>
+<!-- ClickTale end of Top part -->
+<div class="z-m z-w74">
+<div class="b8">
+	<div class="height8"></div>
+	<div>
+		
+    	<div class="w8"></div>
+    	<a href="{%$hostUrl%}/faq/myfaq?uid={%$uid%}">
+    		<div class="tab_p6a">我的问题</div>
+    	</a>
+    	<div class="w8"></div>
+    	<div class="w480"></div>
+  	</div>
+
+  	<ul class="p6">
+  		<li class="tab2"><B><a href="{%$hostUrl%}/faq/myfaq?uid={%$uid%}" style="color:#fff">我的问题</a></B></li>
+		<li><a href="{%$hostUrl%}/faq/index?uid={%$uid%}">提交问题</a></li>
+
+	</ul>
+  	
+    
+
+    
+  	<div style="clear:both;"></div>
+  	<div style="width:740px;height:500px; overflow-y:auto;">
+<table width="720" border="0" align="center" cellpadding="0" cellspacing="1" bgcolor="#eeeeee" style="table-layout:fixed;"  height="400px">
+	<tr>
+<td width="40" align="center" bgcolor="#FFFFD7">编号</td>
+    <td width="50" bgcolor="#FFFFD7">类型</td>
+    <td width="126" align="center" bgcolor="#FFFFD7">标题</td>
+    <td  align="center" bgcolor="#FFFFD7">内容</td>
+    <td width="130" align="center" bgcolor="#FFFFD7">提交日期</td>
+    </tr>
+    {%if $faq%}
+    {%foreach from=$faq item=data%}
+  	<tr >
+    <td align="center" bgcolor="#FFFFFF" >{%$data.id%}</td>
+    <td bgcolor="#FFFFFF">{%$data.type%}</td>
+    <td align="center" bgcolor="#FFFFFF" class="p1234">{%$data.title%}</td>
+    <td align="center" bgcolor="#FFFFFF" class="p1234">{%$data.content%}</td>
+    <td align="center" bgcolor="#FFFFFF" class="color666">{%$data.create_time|date_format:"%Y-%m-%d %H:%M:%S"%}
+</td>
+    </tr>
+    {%/foreach%}
+    {%/if%}
+</table>
+</div>
+<div class="height4"></div>
+<div class="page">  </div>
+<div class="height8"></div>
+<div class="height8"></div>
+</div>
+</div>
+<!-- ClickTale Bottom part -->
+<div id="ClickTaleDiv" style="display: none;"></div>
+
+</body>

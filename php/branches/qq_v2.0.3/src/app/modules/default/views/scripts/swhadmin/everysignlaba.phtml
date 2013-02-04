@@ -1,0 +1,89 @@
+{%include file="hapyfishadmin/header.phtml"%}
+<style type="text/css">
+    <!--
+    table{font-size:14px;border-collapse: collapse;border-spacing: 0;empty-cells: show;}
+    th, td {border: 1px solid #B1CBE2;}
+    th{background-color: #D5E7F3;}
+    td{padding:2px;}
+    .odd{background-color: #EAF2F5;}
+    .total{font-weight:bold;}
+
+    -->
+</style>
+<h1>后台管理</h1>
+<ul id="nav">
+    <li><a href="{%$baseUrl%}/swhadmin">首页</a></li>
+    <li><a href="{%$baseUrl%}/swhadmin/timegift">时间礼包管理</a></li>
+    <li><a href="{%$baseUrl%}/swhadmin/levelgift">等级礼包管理</a></li>
+    <li><a href="{%$baseUrl%}/swhadmin/sevengift">七天礼包管理</a></li>
+    <li><a href="{%$baseUrl%}/swhadmin/package">礼包管理</a></li>
+    <li><a href="{%$baseUrl%}/swhadmin/daliytask">日常任务</a></li>
+    <li><a href="{%$baseUrl%}/swhadmin/guild">公会</a></li>
+    <li><a href="{%$baseUrl%}/swhadmin/activity">活动礼包</a></li>
+    <li><a href="{%$baseUrl%}/swhadmin/activitycdkey">活动cdkey生成</a></li>
+    <li><a href="{%$baseUrl%}/swhadmin/loadinggift">loading活动礼包</a></li>
+    <li><a href="{%$baseUrl%}/swhadmin/everysignnotice">每日趣闻</a></li>
+    <li><a href="{%$baseUrl%}/swhadmin/everysignlaba">每日签到 拉霸奖励</a></li>
+    <li><a href="{%$baseUrl%}/swhadmin/everysignfiveandseven">每日签到 5日7日奖励</a></li>
+    <li>当前登录者：{%$adminName%}</li>
+</ul>
+
+<div id="container">
+    <strong>每日签到 拉霸奖励</strong>
+    <div id="divedit">
+        <table >
+            <tr>
+                <th>天数</th><th>普通用户</th><th>vip1用户</th><th>vip3用户</th><th>操作</th>
+            </tr>
+            {% foreach from=$list item=data %}
+            <tr>
+                <td><input id="actitivty_{%$data.day%}_list" value="{%$data.day%}" size=38 /></td>
+                <td><input id="actitivty1_{%$data.day%}" value="{%$data.normal_award%}" size=38 /></td>
+                <td><input id="actitivty2_{%$data.day%}" value="{%$data.vip_frist_award%}" size=38 /></td>
+                <td><input id="actitivty3_{%$data.day%}" value="{%$data.vip_second_award%}" size=38 /></td>
+                <td><input type="button"  onclick="add({%$data.day%});" value="修改"/></td>
+            </tr>
+            {% /foreach  %}
+        </table>
+        <input type="button" onclick="rest()" value="重置拉霸缓存">
+    </div>
+</div><!--/#container-->
+<script type="text/javascript">
+    function rest(){
+        $.ajax({
+            type: 'POST',
+            url: '/swhadmin/everysignlabarest',
+            data: {'type':0},
+            dataType: 'text',
+            success: function(resp){
+                alert('操作成功');
+                location.reload(true);  
+            },
+            error: function(resp){
+            },
+            complete: function(resp){
+            }
+        });
+    }
+    
+    function add(id) {
+        var normal_award = $("#actitivty1_"+id).val();
+        var vip_frist_award = $("#actitivty2_"+id).val();
+        var vip_second_award = $("#actitivty3_"+id).val();
+        $.ajax({
+            type: 'POST',
+            url: '/swhadmin/everysignawardadd',
+            data: {'id':id, 'normal_award':normal_award, 'vip_frist_award':vip_frist_award,'vip_second_award':vip_second_award},
+            dataType: 'text',
+            success: function(resp){
+               alert('操作成功');
+                location.reload(true);  
+            },
+            error: function(resp){
+            },
+            complete: function(resp){
+            }
+        });	
+    }
+</script>
+{%include file="hapyfishadmin/footer.phtml"%}

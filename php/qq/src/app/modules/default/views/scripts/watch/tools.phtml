@@ -1,0 +1,230 @@
+<div style="position:absolute;left:970px;top:10px;width:300px;height:940px;background:#FFFFFF;margin:0px;padding:5px 0px;border:1px solid #D9DCE2;margin-top:5px;align:center;text-align:center;font-weight:bold;">
+<div style="color:#3b5998;padding-top:2px;padding-bottom:12px;"><a style="color:#FF0000" href="{%$hostUrl%}/nicktest/clearuser?uid={%$uid%}">重置帐号</a></div>
+<div style="color:#3b5998;padding-top:2px;padding-bottom:12px;">
+	<a style="color:#FF0000" href="{%$hostUrl%}/nicktest/completehelp?uid={%$uid%}">跳过所有新手引导</a>
+	<a style="color:#FF0000" href="{%$hostUrl%}/nicktest/completecurhelp?uid={%$uid%}">跳过当前新手引导</a>
+</div>
+<div style="color:#3b5998;padding-top:2px;padding-bottom:12px;">
+	<a style="color:#FF0000" href="javascript:void(0);" onclick="clearActivity({%$uid%});">重置每日任务</a>
+</div>
+<div style="color:#3b5998;padding-top:2px;padding-bottom:12px;"><a style="color:#FF0000" href="javascript:void(0);" onclick="showFaq();">Faq</a></div>
+<div style="color:#3b5998;padding-top:2px;padding-bottom:12px;"><a style="color:#FF0000" href="javascript:void(0);" onclick="hideFlash();">隐藏Flash</a></div>
+<ul>
+<li>
+<span>金币：</span>
+<input type="text" id="coin" name="coin" size="10" value="">
+<input type="button" value="添加" onclick="addcoin();">
+</li>
+<li style="margin-top:15px;">
+<span>宝石：</span>
+<input type="text" id="gem" name="gem" size="10" value="">
+<input type="button" value="添加"  onclick="addgem();">
+</li>
+<li style="margin-top:15px;">
+<span>道具id：</span>
+<input type="text" id="itemId" name="id" size="6" value="" >
+数量<input type="text" id="itemNum" name="num" size="6" value="" >
+<input type="button" value="添加" onclick="additem({%$uid%});">
+</li>
+<li style="margin-top:15px;">
+<span>朋友id：</span>
+<input type="text" id="fid" name="fid" size="6" value="" >
+<input type="button" value="添加" onclick="addfriend();">
+</li>
+<li style="margin-top:15px;">
+<span>炼金等级：</span>
+<input type="text" id="level" name="level" size="6" value="" >
+<input type="button" value="添加" onclick="addlevel();">
+</li>
+<li style="margin-top:15px;">
+<span>活跃度：</span>
+<input type="text" id="activity" name="num" size="6" value="" >
+<input type="button" value="添加" onclick="addactivity();">
+</li>
+<li style="margin-top:15px;">
+<span>存档：</span>
+<input type="text" id="dumpFileName" name="dumpFileName" size="35" value="" >
+<input type="hidden" id="uidTxt" name="uidTxt" value="{%$uid%}" >
+<input type="button" value="存档" onclick="adddump();">
+</li>
+<li style="margin-top:15px;">
+<form action="/nicktest/loaduserdata"  method="post">
+<span>读档：</span>
+        <select id="loadId" name="loadId">
+            <option value="-1">请选择存档</option >&nbsp;&nbsp;
+            {% foreach from=$dumpList item=dump %}
+            <option value="{%$dump.id%}">{%$dump.file_name%}</option>&nbsp;&nbsp;
+            {% /foreach %}
+        </select>
+<input type="hidden" id="uid" name="uid" value="{%$uid%}" >
+<input type="submit" value="读档">
+</form>
+</li>
+<li style="margin-top:15px;">
+<form action="/nicktest/removeuserdata"  method="post">
+<span>删除存档：</span>
+        <select id="revId" name="revId">
+            <option value="-1">请选择存档</option >&nbsp;&nbsp;
+            {% foreach from=$dumpList item=dump %}
+            <option value="{%$dump.id%}">{%$dump.file_name%}</option>&nbsp;&nbsp;
+            {% /foreach %}
+        </select>
+<input type="hidden" id="uidRev" name="uidRev" value="{%$uid%}" >
+<input type="submit" value="删除">
+</form>
+</li>
+
+<li style="margin-top:15px;">
+<form action="/nicktest/completetask"  method="post">
+<span>完成任务：</span>
+        <select id="taskId" name="taskId">
+            <option value="-1">请选择任务</option >&nbsp;&nbsp;
+            {% foreach from=$taskList item=task %}
+            {% if $task.state != 1 %}
+                <option value="{%$task.id%}">{%$task.name%}</option>&nbsp;&nbsp;
+            {% /if %}
+            {% /foreach %}
+        </select>
+<input type="hidden" id="uidTask" name="uidTask" value="{%$uid%}" >
+<input type="submit" value="完成">
+</form>
+</li>
+
+</ul>
+
+<script type="text/javascript">
+function showFaq()
+{
+	$('#flashdiv').css('left', -9999);
+	$('#faq').show();
+	$('#faq').height(600);
+}
+
+function addcoin()
+{   
+	var coin = $('#coin').val();
+	$.ajax({
+        type: 'POST',
+        url: '/tools/addcoin',
+        data: {'coin': coin},
+        dataType: 'text',
+        timeout: 30000,
+        success: function(resp){
+        	alert('添加成功');
+        }
+		});
+}
+function addgem()
+{
+	var gem = $('#gem').val();
+	$.ajax({
+        type: 'POST',
+        url: '/tools/addgem',
+        data: {'count':gem},
+        dataType: 'text',
+        timeout: 30000,
+        success: function(resp){
+        	alert('添加成功');
+        }
+		});
+}
+
+function clearActivity(uid)
+{
+	$.ajax({
+        type: 'POST',
+        url: '/zxtest/clearactivity',
+        data: {'uid':uid},
+        dataType: 'text',
+        timeout: 30000,
+        success: function(resp){
+        	alert(resp);
+        }
+		});
+}
+function additem(uid)
+{
+	var id = $('#itemId').val();
+	var num = $('#itemNum').val();
+	$.ajax({
+        type: 'POST',
+        url: '/tools/additem',
+        data: {'id':id,'num':num,'uid':uid},
+        dataType: 'text',
+        timeout: 30000,
+        success: function(resp){
+            if(resp.error == false){
+            	alert('检查物品id');
+            }else{
+            	alert('添加成功');
+            }
+        	
+        }
+		});
+}
+function addfriend()
+{
+	var fid = $('#fid').val();
+	$.ajax({
+        type: 'POST',
+        url: '/tools/addfriend',
+        data: {'fid':fid},
+        dataType: 'text',
+        timeout: 30000,
+        success: function(resp){
+            alert('添加成功');
+        }
+		});
+}
+function adddump()
+{
+    var fileName = $('#dumpFileName').val();
+    var uid = $('#uidTxt').val();
+    $.ajax({
+        type: 'POST',
+        url: '/nicktest/dumpuserdata',
+        data: {'filename':fileName,'uid':uid},
+        dataType: 'text',
+        timeout: 30000,
+        success: function(resp){
+            alert(resp);
+        }
+        });
+}
+
+function addlevel()
+{
+	var level = $('#level').val();
+	$.ajax({
+        type: 'POST',
+        url: '/tools/updatelevel',
+        data: {'level':level},
+        dataType: 'text',
+        timeout: 30000,
+        success: function(resp){
+            alert(resp);
+        }
+		});
+}
+
+function step()
+{
+	var step = $('#step').val();
+	HFcLoadTm.statguide(step);
+}
+function addactivity()
+{
+	var activity = $('#activity').val();
+	$.ajax({
+        type: 'POST',
+        url: '/tools/addactivity',
+        data: {'num':activity},
+        dataType: 'text',
+        timeout: 30000,
+        success: function(resp){
+            alert(resp);
+        }
+		});
+}
+</script>
+</div>

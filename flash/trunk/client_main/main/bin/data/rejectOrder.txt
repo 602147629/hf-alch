@@ -1,0 +1,18 @@
+{
+    "result":{
+        "status":1
+    },
+	"satisfaction":-5,
+	"order":{
+		"id":"100",
+		"state":1,
+		"needs":"[[111,5],[212,5]]",
+		"outTime":20,
+		"remainingTime":50,
+		"awards":"[[1,111,5],[1,212,10],[1,313,11]]",
+		"dialog":"哈哈,我需要一个饭团&&饭团真香啊&&肚子好饿啊,没有饭团吃",
+		"avatarId":"1",
+		"avatarName":"没有名字"
+		
+	}
+}

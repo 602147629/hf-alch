@@ -1,0 +1,38 @@
+<script type="text/javascript" src="http://game.weibo.com/media/center/javascript/bin/wyx.connect.js"></script>
+<div class="title" style="position:relative;">
+	<div class="menu">
+        <ul style="padding-left:200px;width:825px;">
+        	<li id="home" alt="进入游戏"><a href="javascript:void(0);" onclick="enterGame();"></a></li>
+        	<li id="invite" alt="邀请好友"><a href="javascript:void(0);"></a></li>
+        	<li id="pay" alt="充值兑换 "><a href="javascript:void(0);"></a></li>
+        	<li id="help" alt="玩家帮助"><a href="javascript:void(0);"></a></li>
+        	<li id="forum" alt="玩家论坛"><a href="http://game.weibo.com/club/showsubjectList?groupId=249" target="_blank"></a></li>
+        	<li id="faqm" alt="问题反馈 "><a href="javascript:void(0);" onclick="showfaq();"></a></li>
+        </ul>
+	</div>
+	<div style="clear:both;">
+	</div>
+{% if $showNotice == true %}
+<div id="notice" style="position:absolute;left:260px;top:65px;width:520px;height:16px;overflow:hidden;">
+<ul>
+{% foreach from=$notice item=data %}
+<li>{%if $data.link%}<a href="{%$data.link%}" target="_blank">[{%$data.create_time|date_format:"%Y-%m-%d"%}]  {%$data.title%}</a>{%else%}[{%$data.create_time|date_format:"%Y-%m-%d"%}]  {%$data.title%}{%/if%}</li>
+{% /foreach %}
+</ul>
+<script type="text/javascript">
+function autoScroll(obj)
+{
+$(obj).find("ul:first").animate({
+	marginTop:"-16px"
+	},500,function(){
+		$(this).css({marginTop:"0px"}).find("li:first").appendTo(this);
+	});
+}
+$(document).ready(function(){
+	setInterval('autoScroll("#notice")',10000)
+});
+</script>
+</div>
+{% /if %}
+</div>
+

@@ -1,0 +1,9 @@
+{
+    "result":{
+		"coin":1111,
+		"gem":1111,
+        "status":1
+    },
+	"tip":10,
+	"satisfaction":5
+}

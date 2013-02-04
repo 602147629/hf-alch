@@ -1,0 +1,182 @@
+<div style="background:#e3eef8;margin:0px;padding:5px 0px;border:2px solid #cee1ee;margin-top:5px;margin-bottom:5px;width:810px;align:center;text-align:center;font-weight:bold;">
+【炼金大冒险】由上海乐之鲸鱼数码科技有限公司提供技术支持&nbsp;&nbsp;用户ID号: {%$uid%}<span id="userinfo" style="color:red;"></span>&nbsp;&nbsp;<a href="javascript:addFavor();"><img src="{%$staticUrl%}/alchemy/image/common/favorite.png" style="top:5px;position:relative;padding-right:8px;" /></a>
+<br/>
+<br/>
+若您在游戏中遇到问题，请<a href="http://www.kaixin001.com/group/topic.php?gid=1091430&tid=42926309" target="_blank">点击这里</a>，或者联系游戏客服QQ：2414377107，欢迎加入玩家QQ群：184010533</a>
+<br/>
+<br/>
+健康游戏忠告：抵制不良游戏，拒绝盗版游戏    注意自我保护，谨防受骗上当    适度游戏益脑，沉迷游戏伤身    合理安排时间，享受健康生活
+</div>
+<div id="faqBox" style="width:815px;height:705px;position:absolute;background-color:#FFFFFF;border:2px solid #ffffff;display:none;">
+<div id="divFaq" style=""></div>
+</div>
+<div id="payBox" style="width:815px;height:1200px;position:absolute;background-color:#FFFFFF;top:92px;display:none;">
+    <div style="color:blue;position:absolute;left:752px;top:2px;"><a id="payClose" href="javascript:void(0);"><img src="{%$staticUrl%}/alchemy/image/common/btnClose.png" /></a></div>
+    <div id="divPay" style=""></div>
+</div>
+
+<iframe width="816" height="176" frameborder="0" scrolling="no" src="{%$staticUrl%}/alchemy/html/b/index.html?v=2012070102"></iframe>
+<div id="faq" style="position:absolute;top:92px;left:0px;display:none;">
+<input type="button"  onclick="hidefaq();" class="hidefaq" />
+<iframe  width="816" height="600" frameborder="0" scrolling="no" src="{%$hostUrl%}/faq/index?uid={%$uid%}" ></iframe>
+</div>
+
+<div style="display:none;"><img src="http://monitor.happyfishgame.com.cn/img/10.jpg"/><img src="http://monitor.happyfishgame.com.cn/img/200.jpg"/></div>
+
+<script src="http://s.kaixin001.com.cn/js/openapp-8.js" language="javascript"></script>
+<script src="{%$staticUrl%}/alchemy/js/payment.js?v=1.0.js" type="text/javascript"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	var config = {appId:'{%$smarty.const.APP_ID%}', appName:'{%$smarty.const.APP_NAME%}', appHostUrl:'{%$hostUrl%}', appStaticUrl:'{%$staticUrl%}',
+            	  sns:'kaixin001', uid:'{%$uid%}', puid:'{%$platformUid%}', sessionkey:'{%$skey%}', sessionid:'{%$sessionid%}'};
+	HFApp.init(config);
+	$("#pay").unbind('click');
+    $("#pay").click(showPay);
+    $("#payClose").click(hidePay);
+    //
+    HFApp.backendReq(['restapi/appinvited']);
+
+    var payConfig = {userId:"{%$uid%}",platformUid:"{%$platformUid%}",staticUrl:"{%$staticUrl%}",payOrderUrl:"{%$hostUrl%}/pay/order"};
+    var payLang = {error:"验证失败,请重新验证。"}; 
+    Hapyfish.Payment.init(payLang, payConfig);
+});
+
+function addFavor()
+{
+	var url = "http://www.kaixin001.com/!app_alchemy/";
+	var title = "炼金大冒险-开心网";
+	if (document.all) {
+		window.external.AddFavorite( url, title);
+	} else if (window.sidebar) {
+		window.sidebar.addPanel(title, url,"");
+	} else if (window.opera && window.print) {
+		var mbm = document.createElement('a');
+		mbm.setAttribute('rel','sidebar');
+		mbm.setAttribute('href',url);
+		mbm.setAttribute('title',title);
+		mbm.click();
+	} else {
+		alert("浏览器不支持直接加入收藏夹，请手动添加。");
+	}
+}
+
+function openInvitationDlg()
+{
+	var p = {"app_id":{%$smarty.const.APP_ID%},"display":"iframe","redirect_uri":"{%$hostUrl%}/callback","text":"剑与魔法的世界，各方势力暗潮涌动，纷争再起！屌丝青年如何炼成高帅富！探险、佣兵、收集、炼金！搞钱，搞怪，搞装备！"};
+    p.cb = function(v){if(window.console) console.log(v);};
+    KX.invitation(p);
+    return false;
+}
+
+function showPay()
+{
+	var url = HFApp.appHostUrl + "/pay";
+	var pardata = {};
+	HFApp.loadHtml(url, 'POST', pardata, 'text', 'divPay');
+	$('#flashdiv').css('left', -9999);
+	$("#payBox").toggle('fast');
+}
+
+function hidePay()
+{
+	$('#flashdiv').css('left', 0);
+	$("#payBox").toggle('fast');
+}
+
+function showfaq()
+{
+	$('#flashdiv').css('left', -9999);
+	$('#faq').show();
+	$('#faq').height(600);
+}
+
+function hidefaq()
+{
+	$('#flashdiv').css('left', 0);
+	$('#faq').hide();
+	$('#faq').height(0);
+}
+
+function statguide(step)
+{
+	HFcLoadTm.statguide(step);
+}
+
+function thisMovie(id)
+{
+	if (navigator.appName.indexOf("Microsoft") != -1) {
+		return window[id];
+	} else {
+		return document[id];
+	}
+}
+
+function jsAutoCommand(data)
+{
+	var f = thisMovie('gameContainer');
+	if (f) {
+		try {
+			if(window.console) console.log(data);
+			f.jsAutoCommand(data);
+		} catch(e){
+			if(window.console) console.debug(e);
+		};
+	}
+}
+
+function _sendFeed(feed, callback)
+{
+	{% if $smarty.const.APP_SERVER_TYPE != 3 %}
+	var opt = $.parseJSON(feed);
+	var p = {"app_id":{%$smarty.const.APP_ID%},"display":"iframe","redirect_uri":"{%$hostUrl%}/callback","linktext":opt.linktext,"link":opt.link, "text":opt.text, "picurl":opt.picurl};
+    p.cb = function(v){
+        if (v&&v.cancel){
+        	if(window.console) console.log(v);
+        } else {
+            if (callback) {
+	        	$.get('/feedapi/feedaward', null, function(data) {
+	        		jsAutoCommand(data);
+	        	}, "text");
+            }
+        }
+    };
+    KX.feed(p);
+    {% else %}
+    alert(feed);
+    {%/if%}
+}
+
+function sendFeed(feed)
+{
+	_sendFeed(feed, true);
+}
+
+function sendStaticFeed(type)
+{
+	var dt = {type:type};
+	$.get('/feedapi/staticfeed', dt, function(data) {
+		if (data && data.status > 0) {
+			_sendFeed(data.feed.data, false);
+		}
+	}, "json");
+}
+
+function payOrder(type)
+{
+	Hapyfish.Payment.payOrder(type);
+}
+
+</script>
+
+{% if $smarty.const.APP_SERVER_TYPE == 1 %}
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-33297048-1']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+{% /if %}

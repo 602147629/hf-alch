@@ -1,0 +1,65 @@
+{%include file="hapyfishadmin/header.phtml"%}
+<style type="text/css">
+    <!--
+    table{font-size:14px;border-collapse: collapse;border-spacing: 0;empty-cells: show;}
+    th, td {border: 1px solid #B1CBE2;}
+    th{background-color: #D5E7F3;}
+    td{padding:2px;}
+    .odd{background-color: #EAF2F5;}
+    .total{font-weight:bold;}
+
+    -->
+</style>
+<h1>后台管理</h1>
+<ul id="nav">
+    <li><a href="{%$baseUrl%}/swhadmin">首页</a></li>
+    <li><a href="{%$baseUrl%}/swhadmin/timegift">时间礼包管理</a></li>
+    <li><a href="{%$baseUrl%}/swhadmin/levelgift">等级礼包管理</a></li>
+    <li><a href="{%$baseUrl%}/swhadmin/sevengift">七天礼包管理</a></li>
+    <li><a href="{%$baseUrl%}/swhadmin/package">礼包管理</a></li>
+    <li><a href="{%$baseUrl%}/swhadmin/daliytask">日常任务</a></li>
+    <li><a href="{%$baseUrl%}/swhadmin/guild">公会</a></li>
+    <li><a href="{%$baseUrl%}/swhadmin/activity">活动礼包</a></li>
+    <li><a href="{%$baseUrl%}/swhadmin/activitycdkey">活动cdkey生成</a></li>
+    <li><a href="{%$baseUrl%}/swhadmin/everysignnotice">每日趣闻</a></li>
+    <li>当前登录者：{%$adminName%}</li>
+</ul>
+
+<div id="container">
+    <strong>loading活动礼包</strong>
+    注：活动礼包内容[661,3,1,4] 分别为cid type num 品质  type分类：1金币，2宝石，3装备道具，4佣兵。（只有装备有品质属性，其他没有为[121,3,1]）
+    <div id="divedit">
+        <table >
+            <tr>
+             <th>活动奖励内容</th><th>操作</th>
+            </tr>
+            {% foreach from=$list item=data %}
+            <tr>
+                <td><input id="actitivty_list" value="{%$data.award%}" size=38 /></td>
+                <td><input type="button"  onclick="update();" value="修改"/></td>
+            </tr>
+            {% /foreach  %}
+        </table>
+    </div>
+</div><!--/#container-->
+<script type="text/javascript">
+
+    function update() {
+        var list = $("#actitivty_list").val();
+        $.ajax({
+            type: 'POST',
+            url: '/swhadmin/loadingadds',
+            data: {'award':list, 'type':1},
+            dataType: 'text',
+            success: function(resp){
+                location.reload(true);  
+            },
+            error: function(resp){
+            },
+            complete: function(resp){
+            }
+        });
+		
+    }
+</script>
+{%include file="hapyfishadmin/footer.phtml"%}
