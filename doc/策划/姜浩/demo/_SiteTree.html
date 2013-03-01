@@ -1,0 +1,423 @@
+<HTML><HEAD><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" /><link href="Resources/axurerpprototype.css" type="text/css" rel="stylesheet"></HEAD>
+<BODY>
+<A href=# onclick='parent.CloseSitemap()' style='font-size:8pt'>Close Frames</A><br><br>
+
+<SCRIPT LANGUAGE="JavaScript">
+image1 = new Image();
+image1.src = 'Resources/plus.gif';
+
+function CloseSitemap()
+{
+	parent.URL = parent.mainFrame.URL
+}
+
+function ToggleDiv(node, id)
+{
+	sibling = document.getElementById(id);
+	if (sibling.style.display == 'none')
+	{
+		if (node.childNodes.length > 0)
+		{
+			if (node.childNodes[0].tagName == "IMG")
+			{
+				node.childNodes[0].src = "Resources/minus.gif";
+			}
+		}
+
+		sibling.style.display = '';
+	}
+	else
+	{
+		if (node.childNodes.length > 0)
+		{
+			if (node.childNodes[0].tagName == "IMG")
+			{
+				node.childNodes[0].src = "Resources/plus.gif";
+			}
+		}
+		sibling.style.display = 'none';
+	}
+}
+
+var currentPage = null;
+
+function highlight(id)
+{
+	if (currentPage != null)
+	{
+		currentPage.style.backgroundColor = '#EEEEFF';
+		currentPage.style.paddingLeft = '0px';
+		currentPage.style.paddingRight = '0px';
+		currentPage.style.border = '0px solid #666666';
+	}
+	
+	currentPage = document.getElementById(id);
+    if (currentPage) {
+	    currentPage.style.backgroundColor = '#DDDDDD';
+	    currentPage.style.paddingLeft = '3px';
+	    currentPage.style.paddingRight = '3px';
+	    currentPage.style.border = '1px solid #666666';
+    }
+}
+
+</SCRIPT>
+<TABLE BORDER="0" cellspacing="0" cellpadding="0">
+	<TR>
+		<TD nowrap><A onclick="ToggleDiv(this, 'd5a9aa542cab04fa7907e09bfa4860336')"><IMG SRC="Resources/minus.gif"></A>&nbsp;&nbsp;<A onclick="parent.mainFrame.location='主场景.html'"><IMG class="plusminus" SRC="Resources/page.gif" border=0><SPAN id="p5a9aa542cab04fa7907e09bfa4860336">主场景</SPAN></A><DIV id="d5a9aa542cab04fa7907e09bfa4860336">
+<TABLE BORDER="0" cellspacing="0" cellpadding="0">
+	<TR>
+		<TD WIDTH="30" nowrap>&nbsp;</TD>
+		<TD nowrap><A onclick="parent.mainFrame.location='加速.html'"><IMG class="plusminus" SRC="Resources/page.gif" border=0><SPAN id="p99c7f77b559744afa70a33f7158731f9">加速</SPAN></A><DIV id="td99c7f77b559744afa70a33f7158731f9">
+			</DIV>
+		</TD>
+	</TR>
+</TABLE>
+<TABLE BORDER="0" cellspacing="0" cellpadding="0">
+	<TR>
+		<TD WIDTH="30" nowrap>&nbsp;</TD>
+		<TD nowrap><A onclick="parent.mainFrame.location='炼金.html'"><IMG class="plusminus" SRC="Resources/page.gif" border=0><SPAN id="p8f429e60335348e282a1b2a562d9bb12">炼金</SPAN></A><DIV id="td8f429e60335348e282a1b2a562d9bb12">
+			</DIV>
+		</TD>
+	</TR>
+</TABLE>
+<TABLE BORDER="0" cellspacing="0" cellpadding="0">
+	<TR>
+		<TD WIDTH="30" nowrap>&nbsp;</TD>
+		<TD nowrap><A onclick="parent.mainFrame.location='炼金2.html'"><IMG class="plusminus" SRC="Resources/page.gif" border=0><SPAN id="pa3d54f7d4cf5496f82b60a789b0f2c74">炼金2</SPAN></A><DIV id="tda3d54f7d4cf5496f82b60a789b0f2c74">
+			</DIV>
+		</TD>
+	</TR>
+</TABLE>
+<TABLE BORDER="0" cellspacing="0" cellpadding="0">
+	<TR>
+		<TD WIDTH="30" nowrap>&nbsp;</TD>
+		<TD nowrap><A onclick="parent.mainFrame.location='收获.html'"><IMG class="plusminus" SRC="Resources/page.gif" border=0><SPAN id="pf5c9e19c8b454621a474ad19400a0b00">收获</SPAN></A><DIV id="tdf5c9e19c8b454621a474ad19400a0b00">
+			</DIV>
+		</TD>
+	</TR>
+</TABLE>
+			</DIV>
+		</TD>
+	</TR>
+</TABLE>
+<TABLE BORDER="0" cellspacing="0" cellpadding="0">
+	<TR>
+		<TD nowrap><A onclick="ToggleDiv(this, 'd5aa5ca9d8ab146d88cf37ed98d537709')"><IMG SRC="Resources/minus.gif"></A>&nbsp;&nbsp;<A onclick="parent.mainFrame.location='世界地图说明.html'"><IMG class="plusminus" SRC="Resources/page.gif" border=0><SPAN id="p5aa5ca9d8ab146d88cf37ed98d537709">世界地图说明</SPAN></A><DIV id="d5aa5ca9d8ab146d88cf37ed98d537709">
+<TABLE BORDER="0" cellspacing="0" cellpadding="0">
+	<TR>
+		<TD WIDTH="30" nowrap>&nbsp;</TD>
+		<TD nowrap><A onclick="parent.mainFrame.location='龙顶山.html'"><IMG class="plusminus" SRC="Resources/page.gif" border=0><SPAN id="pe71ef18c431f4962bfe97bf8ea103e40">龙顶山</SPAN></A><DIV id="tde71ef18c431f4962bfe97bf8ea103e40">
+			</DIV>
+		</TD>
+	</TR>
+</TABLE>
+<TABLE BORDER="0" cellspacing="0" cellpadding="0">
+	<TR>
+		<TD WIDTH="30" nowrap>&nbsp;</TD>
+		<TD nowrap><A onclick="parent.mainFrame.location='黑森林.html'"><IMG class="plusminus" SRC="Resources/page.gif" border=0><SPAN id="pcc77f74fc6054971b0b332be07d0c75b">黑森林</SPAN></A><DIV id="tdcc77f74fc6054971b0b332be07d0c75b">
+			</DIV>
+		</TD>
+	</TR>
+</TABLE>
+<TABLE BORDER="0" cellspacing="0" cellpadding="0">
+	<TR>
+		<TD WIDTH="30" nowrap>&nbsp;</TD>
+		<TD nowrap><A onclick="parent.mainFrame.location='泡沫藻泽.html'"><IMG class="plusminus" SRC="Resources/page.gif" border=0><SPAN id="p2c88d9c5c7d04018b116a83335ab4165">泡沫藻泽</SPAN></A><DIV id="td2c88d9c5c7d04018b116a83335ab4165">
+			</DIV>
+		</TD>
+	</TR>
+</TABLE>
+<TABLE BORDER="0" cellspacing="0" cellpadding="0">
+	<TR>
+		<TD WIDTH="30" nowrap>&nbsp;</TD>
+		<TD nowrap><A onclick="parent.mainFrame.location='龙骨墓园.html'"><IMG class="plusminus" SRC="Resources/page.gif" border=0><SPAN id="pfb98b716bced4a41b360d6cf8b56e171">龙骨墓园</SPAN></A><DIV id="tdfb98b716bced4a41b360d6cf8b56e171">
+			</DIV>
+		</TD>
+	</TR>
+</TABLE>
+<TABLE BORDER="0" cellspacing="0" cellpadding="0">
+	<TR>
+		<TD WIDTH="30" nowrap>&nbsp;</TD>
+		<TD nowrap><A onclick="parent.mainFrame.location='矮人矿洞.html'"><IMG class="plusminus" SRC="Resources/page.gif" border=0><SPAN id="p344c1c0fd9ad42cdbd954f2f22055848">矮人矿洞</SPAN></A><DIV id="td344c1c0fd9ad42cdbd954f2f22055848">
+			</DIV>
+		</TD>
+	</TR>
+</TABLE>
+<TABLE BORDER="0" cellspacing="0" cellpadding="0">
+	<TR>
+		<TD WIDTH="30" nowrap>&nbsp;</TD>
+		<TD nowrap><A onclick="parent.mainFrame.location='黑暗村.html'"><IMG class="plusminus" SRC="Resources/page.gif" border=0><SPAN id="pf705cf2f03a448d2b297c2430839bdf3">黑暗村</SPAN></A><DIV id="tdf705cf2f03a448d2b297c2430839bdf3">
+			</DIV>
+		</TD>
+	</TR>
+</TABLE>
+<TABLE BORDER="0" cellspacing="0" cellpadding="0">
+	<TR>
+		<TD WIDTH="30" nowrap>&nbsp;</TD>
+		<TD nowrap><A onclick="parent.mainFrame.location='古代遗迹.html'"><IMG class="plusminus" SRC="Resources/page.gif" border=0><SPAN id="pf020324300394636923dc8b4b94103e9">古代遗迹</SPAN></A><DIV id="tdf020324300394636923dc8b4b94103e9">
+			</DIV>
+		</TD>
+	</TR>
+</TABLE>
+<TABLE BORDER="0" cellspacing="0" cellpadding="0">
+	<TR>
+		<TD WIDTH="30" nowrap>&nbsp;</TD>
+		<TD nowrap><A onclick="parent.mainFrame.location='雪漫镇.html'"><IMG class="plusminus" SRC="Resources/page.gif" border=0><SPAN id="p6000d17e9ca04ae4965133ed57193853">雪漫镇</SPAN></A><DIV id="td6000d17e9ca04ae4965133ed57193853">
+			</DIV>
+		</TD>
+	</TR>
+</TABLE>
+<TABLE BORDER="0" cellspacing="0" cellpadding="0">
+	<TR>
+		<TD WIDTH="30" nowrap>&nbsp;</TD>
+		<TD nowrap><A onclick="parent.mainFrame.location='冰之墙.html'"><IMG class="plusminus" SRC="Resources/page.gif" border=0><SPAN id="pb0480c181ada46a9adace68960f27d96">冰之墙</SPAN></A><DIV id="tdb0480c181ada46a9adace68960f27d96">
+			</DIV>
+		</TD>
+	</TR>
+</TABLE>
+<TABLE BORDER="0" cellspacing="0" cellpadding="0">
+	<TR>
+		<TD WIDTH="30" nowrap>&nbsp;</TD>
+		<TD nowrap><A onclick="parent.mainFrame.location='兽人码头.html'"><IMG class="plusminus" SRC="Resources/page.gif" border=0><SPAN id="p1734dc69c0d84a68b06d2fa167a58d34">兽人码头</SPAN></A><DIV id="td1734dc69c0d84a68b06d2fa167a58d34">
+			</DIV>
+		</TD>
+	</TR>
+</TABLE>
+<TABLE BORDER="0" cellspacing="0" cellpadding="0">
+	<TR>
+		<TD WIDTH="30" nowrap>&nbsp;</TD>
+		<TD nowrap><A onclick="parent.mainFrame.location='尼玛神庙.html'"><IMG class="plusminus" SRC="Resources/page.gif" border=0><SPAN id="p12c40d0cab8146299cc563037cb7690d">尼玛神庙</SPAN></A><DIV id="td12c40d0cab8146299cc563037cb7690d">
+			</DIV>
+		</TD>
+	</TR>
+</TABLE>
+<TABLE BORDER="0" cellspacing="0" cellpadding="0">
+	<TR>
+		<TD WIDTH="30" nowrap>&nbsp;</TD>
+		<TD nowrap><A onclick="parent.mainFrame.location='黑河谷.html'"><IMG class="plusminus" SRC="Resources/page.gif" border=0><SPAN id="pf2e9d4bd80d8496688462754d0a768e8">黑河谷</SPAN></A><DIV id="tdf2e9d4bd80d8496688462754d0a768e8">
+			</DIV>
+		</TD>
+	</TR>
+</TABLE>
+<TABLE BORDER="0" cellspacing="0" cellpadding="0">
+	<TR>
+		<TD WIDTH="30" nowrap>&nbsp;</TD>
+		<TD nowrap><A onclick="parent.mainFrame.location='翡翠森林.html'"><IMG class="plusminus" SRC="Resources/page.gif" border=0><SPAN id="p67ca3b7eb6c545978d19d8af7c647b12">翡翠森林</SPAN></A><DIV id="td67ca3b7eb6c545978d19d8af7c647b12">
+			</DIV>
+		</TD>
+	</TR>
+</TABLE>
+<TABLE BORDER="0" cellspacing="0" cellpadding="0">
+	<TR>
+		<TD WIDTH="30" nowrap>&nbsp;</TD>
+		<TD nowrap><A onclick="parent.mainFrame.location='王城小镇.html'"><IMG class="plusminus" SRC="Resources/page.gif" border=0><SPAN id="p6a2d6f00e99f4239b943f0e0e4078cbf">王城小镇</SPAN></A><DIV id="td6a2d6f00e99f4239b943f0e0e4078cbf">
+			</DIV>
+		</TD>
+	</TR>
+</TABLE>
+<TABLE BORDER="0" cellspacing="0" cellpadding="0">
+	<TR>
+		<TD WIDTH="30" nowrap>&nbsp;</TD>
+		<TD nowrap><A onclick="parent.mainFrame.location='卡尔萨斯.html'"><IMG class="plusminus" SRC="Resources/page.gif" border=0><SPAN id="p12b02f3ba0ba443bbf5e6d72b0ef5175">卡尔萨斯</SPAN></A><DIV id="td12b02f3ba0ba443bbf5e6d72b0ef5175">
+			</DIV>
+		</TD>
+	</TR>
+</TABLE>
+			</DIV>
+		</TD>
+	</TR>
+</TABLE>
+<TABLE BORDER="0" cellspacing="0" cellpadding="0">
+	<TR>
+		<TD nowrap><A onclick="ToggleDiv(this, 'df8bcce43dbf1493090700c786cffe397')"><IMG SRC="Resources/minus.gif"></A>&nbsp;&nbsp;<A onclick="parent.mainFrame.location='图鉴.html'"><IMG class="plusminus" SRC="Resources/page.gif" border=0><SPAN id="pf8bcce43dbf1493090700c786cffe397">图鉴</SPAN></A><DIV id="df8bcce43dbf1493090700c786cffe397">
+<TABLE BORDER="0" cellspacing="0" cellpadding="0">
+	<TR>
+		<TD WIDTH="30" nowrap>&nbsp;</TD>
+		<TD nowrap><A onclick="parent.mainFrame.location='工作台.html'"><IMG class="plusminus" SRC="Resources/page.gif" border=0><SPAN id="p7b77167ac24e47179fc99f75cc98ccea">工作台</SPAN></A><DIV id="td7b77167ac24e47179fc99f75cc98ccea">
+			</DIV>
+		</TD>
+	</TR>
+</TABLE>
+<TABLE BORDER="0" cellspacing="0" cellpadding="0">
+	<TR>
+		<TD WIDTH="30" nowrap>&nbsp;</TD>
+		<TD nowrap><A onclick="parent.mainFrame.location='材料.html'"><IMG class="plusminus" SRC="Resources/page.gif" border=0><SPAN id="p7ccfae8dadc24a428dbeffd7794293a1">材料</SPAN></A><DIV id="td7ccfae8dadc24a428dbeffd7794293a1">
+			</DIV>
+		</TD>
+	</TR>
+</TABLE>
+<TABLE BORDER="0" cellspacing="0" cellpadding="0">
+	<TR>
+		<TD WIDTH="30" nowrap>&nbsp;</TD>
+		<TD nowrap><A onclick="parent.mainFrame.location='材料细分.html'"><IMG class="plusminus" SRC="Resources/page.gif" border=0><SPAN id="pe0e9af51bb8c479da31ebf845c56131e">材料细分</SPAN></A><DIV id="tde0e9af51bb8c479da31ebf845c56131e">
+			</DIV>
+		</TD>
+	</TR>
+</TABLE>
+			</DIV>
+		</TD>
+	</TR>
+</TABLE>
+<TABLE BORDER="0" cellspacing="0" cellpadding="0">
+	<TR>
+		<TD nowrap><A onclick="ToggleDiv(this, 'd3e6a2d03fef64c57928d2c9ec5853499')"><IMG SRC="Resources/minus.gif"></A>&nbsp;&nbsp;<A onclick="parent.mainFrame.location='仓库.html'"><IMG class="plusminus" SRC="Resources/page.gif" border=0><SPAN id="p3e6a2d03fef64c57928d2c9ec5853499">仓库</SPAN></A><DIV id="d3e6a2d03fef64c57928d2c9ec5853499">
+<TABLE BORDER="0" cellspacing="0" cellpadding="0">
+	<TR>
+		<TD WIDTH="30" nowrap>&nbsp;</TD>
+		<TD nowrap><A onclick="parent.mainFrame.location='道具.html'"><IMG class="plusminus" SRC="Resources/page.gif" border=0><SPAN id="pc4709b7706744baaa0ae0794c826c173">道具</SPAN></A><DIV id="tdc4709b7706744baaa0ae0794c826c173">
+			</DIV>
+		</TD>
+	</TR>
+</TABLE>
+<TABLE BORDER="0" cellspacing="0" cellpadding="0">
+	<TR>
+		<TD WIDTH="30" nowrap>&nbsp;</TD>
+		<TD nowrap><A onclick="parent.mainFrame.location='装备.html'"><IMG class="plusminus" SRC="Resources/page.gif" border=0><SPAN id="pa90f52434efa431b97fc464aef5ee2e6">装备</SPAN></A><DIV id="tda90f52434efa431b97fc464aef5ee2e6">
+			</DIV>
+		</TD>
+	</TR>
+</TABLE>
+<TABLE BORDER="0" cellspacing="0" cellpadding="0">
+	<TR>
+		<TD WIDTH="30" nowrap>&nbsp;</TD>
+		<TD nowrap><A onclick="parent.mainFrame.location='卷轴.html'"><IMG class="plusminus" SRC="Resources/page.gif" border=0><SPAN id="p121389c215de44a4b1e713efbea157d8">卷轴</SPAN></A><DIV id="td121389c215de44a4b1e713efbea157d8">
+			</DIV>
+		</TD>
+	</TR>
+</TABLE>
+<TABLE BORDER="0" cellspacing="0" cellpadding="0">
+	<TR>
+		<TD WIDTH="30" nowrap>&nbsp;</TD>
+		<TD nowrap><A onclick="parent.mainFrame.location='装修类.html'"><IMG class="plusminus" SRC="Resources/page.gif" border=0><SPAN id="p6a7276c56fdd40e8bd9d1fef5d28bb60">装修类</SPAN></A><DIV id="td6a7276c56fdd40e8bd9d1fef5d28bb60">
+			</DIV>
+		</TD>
+	</TR>
+</TABLE>
+<TABLE BORDER="0" cellspacing="0" cellpadding="0">
+	<TR>
+		<TD WIDTH="30" nowrap>&nbsp;</TD>
+		<TD nowrap><A onclick="parent.mainFrame.location='diy参考QQ超市.html'"><IMG class="plusminus" SRC="Resources/page.gif" border=0><SPAN id="p66edb0416bcd43bebaade6a6f912db71">diy参考QQ超市</SPAN></A><DIV id="td66edb0416bcd43bebaade6a6f912db71">
+			</DIV>
+		</TD>
+	</TR>
+</TABLE>
+			</DIV>
+		</TD>
+	</TR>
+</TABLE>
+<TABLE BORDER="0" cellspacing="0" cellpadding="0">
+	<TR>
+		<TD nowrap><A onclick="ToggleDiv(this, 'd66f58c67582d43a89b10b4de963c398b')"><IMG SRC="Resources/minus.gif"></A>&nbsp;&nbsp;<A onclick="parent.mainFrame.location='世界地图表现.html'"><IMG class="plusminus" SRC="Resources/page.gif" border=0><SPAN id="p66f58c67582d43a89b10b4de963c398b">世界地图表现</SPAN></A><DIV id="d66f58c67582d43a89b10b4de963c398b">
+<TABLE BORDER="0" cellspacing="0" cellpadding="0">
+	<TR>
+		<TD WIDTH="30" nowrap>&nbsp;</TD>
+		<TD nowrap><A onclick="parent.mainFrame.location='新场景解锁.html'"><IMG class="plusminus" SRC="Resources/page.gif" border=0><SPAN id="p5b2fbcfdf14c45d18073ab20789a0da2">新场景解锁</SPAN></A><DIV id="td5b2fbcfdf14c45d18073ab20789a0da2">
+			</DIV>
+		</TD>
+	</TR>
+</TABLE>
+<TABLE BORDER="0" cellspacing="0" cellpadding="0">
+	<TR>
+		<TD WIDTH="30" nowrap>&nbsp;</TD>
+		<TD nowrap><A onclick="parent.mainFrame.location='新地图解锁.html'"><IMG class="plusminus" SRC="Resources/page.gif" border=0><SPAN id="p9ab798486bd84f97900945a765f4ad5a">新地图解锁</SPAN></A><DIV id="td9ab798486bd84f97900945a765f4ad5a">
+			</DIV>
+		</TD>
+	</TR>
+</TABLE>
+			</DIV>
+		</TD>
+	</TR>
+</TABLE>
+<TABLE BORDER="0" cellspacing="0" cellpadding="0">
+	<TR>
+		<TD nowrap><A onclick="ToggleDiv(this, 'df261a8209520401685d11e87f791a2a6')"><IMG SRC="Resources/minus.gif"></A>&nbsp;&nbsp;<A onclick="parent.mainFrame.location='场景副本.html'"><IMG class="plusminus" SRC="Resources/page.gif" border=0><SPAN id="pf261a8209520401685d11e87f791a2a6">场景副本</SPAN></A><DIV id="df261a8209520401685d11e87f791a2a6">
+<TABLE BORDER="0" cellspacing="0" cellpadding="0">
+	<TR>
+		<TD WIDTH="30" nowrap>&nbsp;</TD>
+		<TD nowrap><A onclick="parent.mainFrame.location='新手村.html'"><IMG class="plusminus" SRC="Resources/page.gif" border=0><SPAN id="p5fbaceaa3c404196b87743baa53259b6">新手村</SPAN></A><DIV id="td5fbaceaa3c404196b87743baa53259b6">
+			</DIV>
+		</TD>
+	</TR>
+</TABLE>
+<TABLE BORDER="0" cellspacing="0" cellpadding="0">
+	<TR>
+		<TD WIDTH="30" nowrap>&nbsp;</TD>
+		<TD nowrap><A onclick="parent.mainFrame.location='遇怪.html'"><IMG class="plusminus" SRC="Resources/page.gif" border=0><SPAN id="pcecc8da7624d48fbbc081a8d3ef2806d">遇怪</SPAN></A><DIV id="tdcecc8da7624d48fbbc081a8d3ef2806d">
+			</DIV>
+		</TD>
+	</TR>
+</TABLE>
+<TABLE BORDER="0" cellspacing="0" cellpadding="0">
+	<TR>
+		<TD WIDTH="30" nowrap>&nbsp;</TD>
+		<TD nowrap><A onclick="parent.mainFrame.location='进入副本.html'"><IMG class="plusminus" SRC="Resources/page.gif" border=0><SPAN id="pd8ad610ceb924938907059898973f7e3">进入副本</SPAN></A><DIV id="tdd8ad610ceb924938907059898973f7e3">
+			</DIV>
+		</TD>
+	</TR>
+</TABLE>
+<TABLE BORDER="0" cellspacing="0" cellpadding="0">
+	<TR>
+		<TD WIDTH="30" nowrap>&nbsp;</TD>
+		<TD nowrap><A onclick="parent.mainFrame.location='邀请好友.html'"><IMG class="plusminus" SRC="Resources/page.gif" border=0><SPAN id="p2d997d92f90e4e209e7214ae6d7abe45">邀请好友</SPAN></A><DIV id="td2d997d92f90e4e209e7214ae6d7abe45">
+			</DIV>
+		</TD>
+	</TR>
+</TABLE>
+			</DIV>
+		</TD>
+	</TR>
+</TABLE>
+<TABLE BORDER="0" cellspacing="0" cellpadding="0">
+	<TR>
+		<TD nowrap><A onclick="ToggleDiv(this, 'd311150a66f354a5abd0ac49cdcb83a54')"><IMG SRC="Resources/minus.gif"></A>&nbsp;&nbsp;<A onclick="parent.mainFrame.location='任务.html'"><IMG class="plusminus" SRC="Resources/page.gif" border=0><SPAN id="p311150a66f354a5abd0ac49cdcb83a54">任务</SPAN></A><DIV id="d311150a66f354a5abd0ac49cdcb83a54">
+<TABLE BORDER="0" cellspacing="0" cellpadding="0">
+	<TR>
+		<TD WIDTH="30" nowrap>&nbsp;</TD>
+		<TD nowrap><A onclick="parent.mainFrame.location='任务列表.html'"><IMG class="plusminus" SRC="Resources/page.gif" border=0><SPAN id="p9709da8e642b431cb5ba72bcaa4f8f93">任务列表</SPAN></A><DIV id="td9709da8e642b431cb5ba72bcaa4f8f93">
+			</DIV>
+		</TD>
+	</TR>
+</TABLE>
+<TABLE BORDER="0" cellspacing="0" cellpadding="0">
+	<TR>
+		<TD WIDTH="30" nowrap>&nbsp;</TD>
+		<TD nowrap><A onclick="parent.mainFrame.location='接任务.html'"><IMG class="plusminus" SRC="Resources/page.gif" border=0><SPAN id="p0d3bfa1a1c8d48ac9fde935f67f2ab90">接任务</SPAN></A><DIV id="td0d3bfa1a1c8d48ac9fde935f67f2ab90">
+			</DIV>
+		</TD>
+	</TR>
+</TABLE>
+<TABLE BORDER="0" cellspacing="0" cellpadding="0">
+	<TR>
+		<TD WIDTH="30" nowrap>&nbsp;</TD>
+		<TD nowrap><A onclick="parent.mainFrame.location='任务奖励面板.html'"><IMG class="plusminus" SRC="Resources/page.gif" border=0><SPAN id="p8c101fe6889a49c38ba5450e8387b800">任务奖励面板</SPAN></A><DIV id="td8c101fe6889a49c38ba5450e8387b800">
+			</DIV>
+		</TD>
+	</TR>
+</TABLE>
+			</DIV>
+		</TD>
+	</TR>
+</TABLE>
+<TABLE BORDER="0" cellspacing="0" cellpadding="0">
+	<TR>
+		<TD nowrap><A onclick="ToggleDiv(this, 'd057922307bc6477f92c53cff9cdbdbe6')"><IMG SRC="Resources/minus.gif"></A>&nbsp;&nbsp;<A onclick="parent.mainFrame.location='剧情表现.html'"><IMG class="plusminus" SRC="Resources/page.gif" border=0><SPAN id="p057922307bc6477f92c53cff9cdbdbe6">剧情表现</SPAN></A><DIV id="d057922307bc6477f92c53cff9cdbdbe6">
+<TABLE BORDER="0" cellspacing="0" cellpadding="0">
+	<TR>
+		<TD WIDTH="30" nowrap>&nbsp;</TD>
+		<TD nowrap><A onclick="parent.mainFrame.location='对白模式.html'"><IMG class="plusminus" SRC="Resources/page.gif" border=0><SPAN id="p8d99496512ea4d94bb2f6896bcf632b9">对白模式</SPAN></A><DIV id="td8d99496512ea4d94bb2f6896bcf632b9">
+			</DIV>
+		</TD>
+	</TR>
+</TABLE>
+<TABLE BORDER="0" cellspacing="0" cellpadding="0">
+	<TR>
+		<TD WIDTH="30" nowrap>&nbsp;</TD>
+		<TD nowrap><A onclick="parent.mainFrame.location='脚本模式.html'"><IMG class="plusminus" SRC="Resources/page.gif" border=0><SPAN id="pc2188c4b44f8420eb261b4d68eec8402">脚本模式</SPAN></A><DIV id="tdc2188c4b44f8420eb261b4d68eec8402">
+			</DIV>
+		</TD>
+	</TR>
+</TABLE>
+			</DIV>
+		</TD>
+	</TR>
+</TABLE></BODY></HTML>

@@ -1,0 +1,150 @@
+<HTML><HEAD><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" /><link href="Resources/axurerpprototype.css" type="text/css" rel="stylesheet"></HEAD>
+<BODY>
+<A href=# onclick='parent.CloseSitemap()' style='font-size:8pt'>Close Frames</A><br><br>
+
+<SCRIPT LANGUAGE="JavaScript">
+image1 = new Image();
+image1.src = 'Resources/plus.gif';
+
+function CloseSitemap()
+{
+	parent.URL = parent.mainFrame.URL
+}
+
+function ToggleDiv(node, id)
+{
+	sibling = document.getElementById(id);
+	if (sibling.style.display == 'none')
+	{
+		if (node.childNodes.length > 0)
+		{
+			if (node.childNodes[0].tagName == "IMG")
+			{
+				node.childNodes[0].src = "Resources/minus.gif";
+			}
+		}
+
+		sibling.style.display = '';
+	}
+	else
+	{
+		if (node.childNodes.length > 0)
+		{
+			if (node.childNodes[0].tagName == "IMG")
+			{
+				node.childNodes[0].src = "Resources/plus.gif";
+			}
+		}
+		sibling.style.display = 'none';
+	}
+}
+
+var currentPage = null;
+
+function highlight(id)
+{
+	if (currentPage != null)
+	{
+		currentPage.style.backgroundColor = '#EEEEFF';
+		currentPage.style.paddingLeft = '0px';
+		currentPage.style.paddingRight = '0px';
+		currentPage.style.border = '0px solid #666666';
+	}
+	
+	currentPage = document.getElementById(id);
+    if (currentPage) {
+	    currentPage.style.backgroundColor = '#DDDDDD';
+	    currentPage.style.paddingLeft = '3px';
+	    currentPage.style.paddingRight = '3px';
+	    currentPage.style.border = '1px solid #666666';
+    }
+}
+
+</SCRIPT>
+<TABLE BORDER="0" cellspacing="0" cellpadding="0">
+	<TR>
+		<TD nowrap><A onclick="ToggleDiv(this, 'd8d7557e88a8f45f4af72f8667ea7d1b1')"><IMG SRC="Resources/minus.gif"></A>&nbsp;&nbsp;<A onclick="parent.mainFrame.location='Home.html'"><IMG class="plusminus" SRC="Resources/page.gif" border=0><SPAN id="p8d7557e88a8f45f4af72f8667ea7d1b1">Home</SPAN></A><DIV id="d8d7557e88a8f45f4af72f8667ea7d1b1">
+<TABLE BORDER="0" cellspacing="0" cellpadding="0">
+	<TR>
+		<TD WIDTH="30" nowrap>&nbsp;</TD>
+		<TD nowrap><A onclick="parent.mainFrame.location='Page_1.html'"><IMG class="plusminus" SRC="Resources/page.gif" border=0><SPAN id="pbc1c488930ad4371af78e6d1579f8dbc">Page 1</SPAN></A><DIV id="tdbc1c488930ad4371af78e6d1579f8dbc">
+			</DIV>
+		</TD>
+	</TR>
+</TABLE>
+<TABLE BORDER="0" cellspacing="0" cellpadding="0">
+	<TR>
+		<TD WIDTH="30" nowrap>&nbsp;</TD>
+		<TD nowrap><A onclick="parent.mainFrame.location='Page_2.html'"><IMG class="plusminus" SRC="Resources/page.gif" border=0><SPAN id="p837a1efefc8c4cda9f20faa867672101">Page 2</SPAN></A><DIV id="td837a1efefc8c4cda9f20faa867672101">
+			</DIV>
+		</TD>
+	</TR>
+</TABLE>
+<TABLE BORDER="0" cellspacing="0" cellpadding="0">
+	<TR>
+		<TD WIDTH="30" nowrap>&nbsp;</TD>
+		<TD nowrap><A onclick="parent.mainFrame.location='Page_3.html'"><IMG class="plusminus" SRC="Resources/page.gif" border=0><SPAN id="pca4d6fc342864a9e8fcd6491d704539f">Page 3</SPAN></A><DIV id="tdca4d6fc342864a9e8fcd6491d704539f">
+			</DIV>
+		</TD>
+	</TR>
+</TABLE>
+<TABLE BORDER="0" cellspacing="0" cellpadding="0">
+	<TR>
+		<TD WIDTH="30" nowrap>&nbsp;</TD>
+		<TD nowrap><A onclick="parent.mainFrame.location='New_Page_1.html'"><IMG class="plusminus" SRC="Resources/page.gif" border=0><SPAN id="p42a463137fe94511937e693b85c90115">New Page 1</SPAN></A><DIV id="td42a463137fe94511937e693b85c90115">
+			</DIV>
+		</TD>
+	</TR>
+</TABLE>
+<TABLE BORDER="0" cellspacing="0" cellpadding="0">
+	<TR>
+		<TD WIDTH="30" nowrap>&nbsp;</TD>
+		<TD nowrap><A onclick="parent.mainFrame.location='New_Page_2.html'"><IMG class="plusminus" SRC="Resources/page.gif" border=0><SPAN id="pf3f61b2dca08484fa2e702e6e8bc7f98">New Page 2</SPAN></A><DIV id="tdf3f61b2dca08484fa2e702e6e8bc7f98">
+			</DIV>
+		</TD>
+	</TR>
+</TABLE>
+<TABLE BORDER="0" cellspacing="0" cellpadding="0">
+	<TR>
+		<TD WIDTH="30" nowrap>&nbsp;</TD>
+		<TD nowrap><A onclick="parent.mainFrame.location='New_Page_3.html'"><IMG class="plusminus" SRC="Resources/page.gif" border=0><SPAN id="pb246735f8abb4d87b10dafffb694e257">New Page 3</SPAN></A><DIV id="tdb246735f8abb4d87b10dafffb694e257">
+			</DIV>
+		</TD>
+	</TR>
+</TABLE>
+<TABLE BORDER="0" cellspacing="0" cellpadding="0">
+	<TR>
+		<TD WIDTH="30" nowrap>&nbsp;</TD>
+		<TD nowrap><A onclick="parent.mainFrame.location='New_Page_4.html'"><IMG class="plusminus" SRC="Resources/page.gif" border=0><SPAN id="p302e46aaf7af413c93db8a2eb9f298f0">New Page 4</SPAN></A><DIV id="td302e46aaf7af413c93db8a2eb9f298f0">
+			</DIV>
+		</TD>
+	</TR>
+</TABLE>
+<TABLE BORDER="0" cellspacing="0" cellpadding="0">
+	<TR>
+		<TD WIDTH="30" nowrap>&nbsp;</TD>
+		<TD nowrap><A onclick="parent.mainFrame.location='New_Page_5.html'"><IMG class="plusminus" SRC="Resources/page.gif" border=0><SPAN id="p2845ca1224324ac1975f0708b6378d4e">New Page 5</SPAN></A><DIV id="td2845ca1224324ac1975f0708b6378d4e">
+			</DIV>
+		</TD>
+	</TR>
+</TABLE>
+<TABLE BORDER="0" cellspacing="0" cellpadding="0">
+	<TR>
+		<TD WIDTH="30" nowrap>&nbsp;</TD>
+		<TD nowrap><A onclick="parent.mainFrame.location='New_Page_6.html'"><IMG class="plusminus" SRC="Resources/page.gif" border=0><SPAN id="pf9c53079cb364fa18b92aa8de829489a">New Page 6</SPAN></A><DIV id="tdf9c53079cb364fa18b92aa8de829489a">
+			</DIV>
+		</TD>
+	</TR>
+</TABLE>
+<TABLE BORDER="0" cellspacing="0" cellpadding="0">
+	<TR>
+		<TD WIDTH="30" nowrap>&nbsp;</TD>
+		<TD nowrap><A onclick="parent.mainFrame.location='New_Page_8.html'"><IMG class="plusminus" SRC="Resources/page.gif" border=0><SPAN id="p695848ce77a445a9bcccc8a03ade8e35">New Page 8</SPAN></A><DIV id="td695848ce77a445a9bcccc8a03ade8e35">
+			</DIV>
+		</TD>
+	</TR>
+</TABLE>
+			</DIV>
+		</TD>
+	</TR>
+</TABLE></BODY></HTML>
